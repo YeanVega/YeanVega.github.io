@@ -358,7 +358,7 @@
     <ul class="contact-list">
       <li>
         <span class="c-label">Email</span>
-        <a href="/cdn-cgi/l/email-protection#453c332029243f262a05302b24296b2021306b262a"><span class="__cf_email__" data-cfemail="abd2ddcec7cad1c8c4ebdec5cac785cecfde85c8c4">[email&#160;protected]</span></a>
+        <a href="mailto:andresvelazco.est@gmail.com">andresvelazco.est@gmail.com</a>
       </li>
       <li>
         <span class="c-label">LinkedIn</span>
@@ -379,8 +379,17 @@
 <footer>
   <span data-es="© 2026 Yeferson Andres Velazco · Estadístico · Universidad Nacional de Colombia" data-en="© 2026 Yeferson Andres Velazco · Statistician · Universidad Nacional de Colombia">© 2026 Yeferson Andres Velazco · Estadístico · Universidad Nacional de Colombia</span>
 </footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   function setLang(lang) {
     document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.tex
+      btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+    });
+    document.querySelectorAll('[data-es]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+  }
+</script>
+</body>
+</html>
