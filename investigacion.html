@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación — Yeferson Andres Velazco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1a1a18; --ink-2: #4a4a46; --ink-3: #8a8a84;
+  --paper: #f8f6f1; --paper-2: #efecea; --rule: #d8d5cf;
+  --accent: #1d4a6e; --accent-light: #e6f0f8;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.7; font-weight: 300; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(248,246,241,0.93); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 clamp(1.5rem,5vw,4rem); height: 60px;
+}
+.nav-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); font-weight: 500; }
+.lang-toggle { display: flex; border: 1px solid var(--rule); overflow: hidden; }
+.lang-btn { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; padding: 0.35rem 0.8rem; cursor: pointer; border: none; background: transparent; color: var(--ink-3); font-family: var(--sans); transition: background 0.15s, color 0.15s; }
+.lang-btn.active { background: var(--accent); color: #fff; }
+.lang-btn:not(.active):hover { background: var(--paper-2); color: var(--ink); }
+
+/* ── PAGE HERO ── */
+.page-hero { padding: 8rem clamp(1.5rem,8vw,10rem) 4rem; max-width: 1100px; margin: 0 auto; }
+.back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; font-weight: 500; margin-bottom: 2.5rem; opacity: 0.8; transition: opacity 0.2s; }
+.back-link:hover { opacity: 1; }
+.eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 1rem; display: block; }
+.page-hero h1 { font-family: var(--serif); font-size: clamp(2.2rem,4vw,3.4rem); font-weight: 400; color: var(--ink); line-height: 1.1; margin-bottom: 1.5rem; }
+.page-hero > p { font-size: 1rem; color: var(--ink-2); max-width: 62ch; font-weight: 300; line-height: 1.8; margin-bottom: 2rem; }
+.role-note { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--paper-2); border: 1px solid var(--rule); padding: 0.6rem 1.2rem; font-size: 0.8rem; color: var(--ink-2); }
+.role-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+
+/* ── FILTERS ── */
+.filter-bar { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.5rem,8vw,10rem) 3rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.filter-btn { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.9rem; border: 1px solid var(--rule); background: transparent; color: var(--ink-3); cursor: pointer; font-family: var(--sans); font-weight: 500; transition: all 0.15s; }
+.filter-btn:hover, .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.divider { border: none; border-top: 1px solid var(--rule); max-width: 1100px; margin: 0 auto; }
+
+/* ── PAPER CARD ── */
+.paper-card { max-width: 1100px; margin: 0 auto; padding: 3.5rem clamp(1.5rem,8vw,10rem); border-bottom: 1px solid var(--rule); }
+.paper-card.hidden { display: none; }
+
+.paper-top { display: grid; grid-template-columns: 60px 1fr; gap: 2rem; align-items: start; margin-bottom: 2.5rem; }
+.paper-number { font-family: var(--serif); font-size: 3.5rem; color: var(--rule); line-height: 1; font-weight: 400; }
+.paper-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+.meta-tag { font-size: 0.68rem; padding: 0.2rem 0.65rem; border: 1px solid var(--rule); color: var(--ink-3); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+.meta-tag.status-review { background: #fff8e6; border-color: #e6c96a; color: #7a5800; }
+.meta-tag.status-complete { background: #eaf3de; border-color: #c0dd97; color: #3b6d11; }
+.meta-tag.status-draft { background: var(--paper-2); border-color: var(--rule); color: var(--ink-3); }
+.meta-tag.area { background: var(--accent-light); border-color: #b8d0e6; color: var(--accent); }
+.role-tag { display: inline-block; font-size: 0.68rem; padding: 0.2rem 0.65rem; background: var(--accent); color: #fff; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.role-tag.advisor { background: #6a5a4a; }
+.paper-title { font-family: var(--serif); font-size: clamp(1.2rem,2vw,1.65rem); font-weight: 400; color: var(--ink); line-height: 1.25; margin-bottom: 0.4rem; }
+.paper-subtitle { font-size: 0.85rem; color: var(--ink-3); font-weight: 300; }
+
+/* ── STATS ROW ── */
+.stats-row { display: flex; gap: 1.5px; background: var(--rule); border: 1.5px solid var(--rule); margin-bottom: 2rem; }
+.stat-box { background: var(--paper-2); padding: 1.25rem 1.5rem; flex: 1; text-align: center; }
+.stat-num { font-family: var(--serif); font-size: 1.8rem; color: var(--ink); display: block; line-height: 1; margin-bottom: 0.3rem; }
+.stat-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+
+/* ── SUMMARY (always visible) ── */
+.summary-section { margin-bottom: 1.5rem; }
+.col-label { font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.6rem; display: block; }
+.col-text { font-size: 0.9rem; color: var(--ink-2); line-height: 1.85; font-weight: 300; }
+
+/* ── METHODS + KEYWORDS (always visible) ── */
+.methods-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+.method-pill { font-size: 0.73rem; padding: 0.28rem 0.75rem; background: var(--paper-2); border: 1px solid var(--rule); color: var(--ink-2); }
+.kw-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.75rem; }
+.kw { font-size: 0.7rem; padding: 0.22rem 0.6rem; background: transparent; border: 1px solid var(--rule); color: var(--ink-3); }
+
+/* ── DEEP DIVE TOGGLE BUTTON ── */
+.deep-btn {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-weight: 500; color: var(--accent); background: transparent;
+  border: 1px solid var(--accent); padding: 0.5rem 1rem;
+  cursor: pointer; font-family: var(--sans); transition: all 0.15s;
+  user-select: none;
+}
+.deep-btn:hover { background: var(--accent); color: #fff; }
+.deep-btn .arrow { display: inline-block; transition: transform 0.25s; font-style: normal; }
+.deep-btn.open .arrow { transform: rotate(180deg); }
+
+/* ── DEEP DIVE PANEL ── */
+.deep-panel { display: none; margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 2rem; }
+.deep-panel.open { display: block; }
+
+.deep-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 2rem; }
+
+/* Findings in deep panel */
+.findings-list { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.finding-item { background: var(--paper); padding: 1.25rem 1.4rem; display: flex; gap: 1.2rem; align-items: baseline; }
+.finding-val { font-family: var(--serif); font-size: 1.1rem; color: var(--accent); font-weight: 400; min-width: 70px; flex-shrink: 0; line-height: 1.2; }
+.finding-item p { font-size: 0.83rem; color: var(--ink-2); line-height: 1.65; font-weight: 300; }
+
+/* Conclusion strip */
+.conclusion-strip { border-left: 3px solid var(--accent); padding: 1rem 1.5rem; background: var(--accent-light); font-size: 0.87rem; color: var(--ink-2); line-height: 1.8; font-weight: 300; margin-bottom: 0; }
+
+/* Corr block in deep panel */
+.corr-block { background: var(--paper-2); border: 1px solid var(--rule); padding: 1.25rem 1.5rem; }
+.corr-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); }
+.corr-row:last-child { border-bottom: none; }
+.corr-vars { font-size: 0.83rem; color: var(--ink); flex: 1; }
+.corr-bar-wrap { flex: 1; height: 3px; background: var(--rule); }
+.corr-bar { height: 100%; background: var(--accent); }
+.corr-val { font-family: var(--serif); font-size: 1rem; color: var(--accent); min-width: 55px; text-align: right; }
+
+footer { text-align: center; padding: 2.5rem; font-size: 0.78rem; color: var(--ink-3); border-top: 1px solid var(--rule); background: var(--paper); margin-top: 1rem; }
+
+@media (max-width: 700px) {
+  .deep-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .stats-row { flex-wrap: wrap; }
+  .stat-box { min-width: calc(50% - 1px); }
+  .paper-top { grid-template-columns: 1fr; gap: 0.25rem; }
+  .paper-number { font-size: 2.5rem; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Yeferson Velazco</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html" data-es="Portafolio" data-en="Portfolio">Portafolio</a></li>
+      <li><a href="investigacion.html" class="active" data-es="Investigación" data-en="Research">Investigación</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <a href="index.html" class="back-link">← <span data-es="Volver al portafolio" data-en="Back to portfolio">Volver al portafolio</span></a>
+  <span class="eyebrow" data-es="Producción académica" data-en="Academic output">Producción académica</span>
+  <h1 data-es="Investigación &amp; Asesoría Estadística" data-en="Research &amp; Statistical Advisory">Investigación &amp; Asesoría Estadística</h1>
+  <p data-es="Proyectos académicos en los que he participado como autor/coautor o asesor estadístico: diseño metodológico, cálculo de muestras, análisis de datos e interpretación de resultados. Haz clic en «Profundizar» para ver hallazgos detallados." data-en="Academic projects in which I participated as author/co-author or statistical advisor: methodological design, sample calculation, data analysis, and results interpretation. Click «Deep dive» to see detailed findings.">Proyectos académicos en los que he participado como coautor o asesor estadístico: diseño metodológico, cálculo de muestras, análisis de datos e interpretación de resultados. Haz clic en «Profundizar» para ver hallazgos detallados.</p>
+  <div class="role-note">
+    <span class="role-dot"></span>
+    <span data-es="Roles: Autor en proyectos propios · Asesor estadístico en los demás" data-en="Roles: Author in own projects · Statistical advisor in others">Roles: Coautor en proyectos propios · Asesor estadístico en los demás</span>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCards('all',this)" data-es="Todos (7)" data-en="All (7)">Todos (7)</button>
+  <button class="filter-btn" onclick="filterCards('salud',this)" data-es="Salud &amp; Deporte" data-en="Health &amp; Sport">Salud &amp; Deporte</button>
+  <button class="filter-btn" onclick="filterCards('educacion',this)" data-es="Educación" data-en="Education">Educación</button>
+  <button class="filter-btn" onclick="filterCards('bibliometria',this)" data-es="Bibliometría" data-en="Bibliometrics">Bibliometría</button>
+  <button class="filter-btn" onclick="filterCards('coautor',this)" data-es="Coautor" data-en="Co-author">Coautor</button>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAPER 01 — Psicosociales entrenadores (K-medoids)      -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="paper-card" data-category="salud coautor">
+  <div class="paper-top">
+    <div class="paper-number">01</div>
+    <div>
+      <div class="paper-meta">
+        <span class="meta-tag">2025</span>
+        <span class="meta-tag area" data-es="Salud Ocupacional" data-en="Occupational Health">Salud Ocupacional</span>
+        <span class="meta-tag area">Deporte</span>
+      </div>
+      <span class="role-tag advisor" data-es="Asesor estadístico" data-en="Statistical advisor">Asesor estadístico</span>
+      <h2 class="paper-title" data-es="Perfiles de exposición a factores psicosociales laborales en entrenadores deportivos: análisis K-medoids" data-en="Psychosocial risk exposure profiles in sports coaches: K-medoids analysis">Perfiles de exposición a factores psicosociales laborales en entrenadores deportivos: análisis K-medoids</h2>
+      <p class="paper-subtitle">Indeportes Cundinamarca · Modelo OIT-SST</p>
+    </div>
+  </div>
+
+  <!-- STATS — always visible -->
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-num">395</span><span class="stat-label" data-es="Entrenadores" data-en="Coaches">Entrenadores</span></div>
+    <div class="stat-box"><span class="stat-num">7</span><span class="stat-label" data-es="Dimensiones OIT" data-en="ILO Dimensions">Dimensiones OIT</span></div>
+    <div class="stat-box"><span class="stat-num">2</span><span class="stat-label" data-es="Perfiles" data-en="Profiles">Perfiles</span></div>
+    <div class="stat-box"><span class="stat-num">81%</span><span class="stat-label">Varianza PC1</span></div>
+  </div>
+
+  <!-- RESUMEN — always visible -->
+  <div class="summary-section">
+    <span class="col-label" data-es="Resumen" data-en="Abstract">Resumen</span>
+    <p class="col-text" data-es="Estudio cuantitativo transversal que identifica perfiles de exposición a riesgos psicosociales en 395 entrenadores adscritos a Indeportes Cundinamarca usando el cuestionario OIT-SST y clustering K-medoids con distancia de Gower. Se encontraron dos grupos diferenciados: alta exposición (n=131) y moderada (n=264). Las dimensiones de Cohesión y Respaldo del Equipo son los principales ejes discriminadores entre perfiles. Las mujeres registraron puntuaciones superiores en todas las dimensiones." data-en="Cross-sectional quantitative study identifying psychosocial risk profiles in 395 coaches affiliated with Indeportes Cundinamarca using the ILO-OSH questionnaire and K-medoids clustering with Gower distance. Two distinct groups found: high exposure (n=131) and moderate (n=264). Team Cohesion and Support dimensions are the main discriminating axes. Women scored higher on all dimensions.">Estudio cuantitativo transversal que identifica perfiles de exposición a riesgos psicosociales en 395 entrenadores adscritos a Indeportes Cundinamarca usando el cuestionario OIT-SST y clustering K-medoids con distancia de Gower. Se encontraron dos grupos diferenciados: alta exposición (n=131) y moderada (n=264). Las dimensiones de Cohesión y Respaldo del Equipo son los principales ejes discriminadores entre perfiles. Las mujeres registraron puntuaciones superiores en todas las dimensiones.</p>
+  </div>
+
+  <!-- METHODS + KEYWORDS — always visible -->
+  <div class="methods-row"><span class="method-pill">Python 3.13</span><span class="method-pill">K-medoids</span><span class="method-pill">Gower</span><span class="method-pill">Spearman + FDR</span><span class="method-pill">PCA</span><span class="method-pill">Mann-Whitney U</span><span class="method-pill">δ Cliff</span></div>
+  <div class="kw-row"><span class="kw">Psicosocial</span><span class="kw" data-es="Entrenadores" data-en="Coaches">Entrenadores</span><span class="kw">K-medoids</span><span class="kw">OIT-SST</span><span class="kw">Burnout</span><span class="kw">PCA</span></div>
+
+  <!-- DEEP DIVE BUTTON -->
+  <button class="deep-btn" onclick="toggleDeep('d01',this)">
+    <span data-es="Profundizar en hallazgos" data-en="Deep dive into findings">Profundizar en hallazgos</span>
+    <em class="arrow">↓</em>
+  </button>
+
+  <!-- DEEP DIVE PANEL -->
+  <div class="deep-panel" id="d01">
+    <div class="deep-grid">
+      <div>
+        <span class="col-label" data-es="Hallazgos principales" data-en="Key findings">Hallazgos principales</span>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-val">K=2</span>
+            <p data-es="Silueta óptima = 0.567. Grupo 0 (n=264): baja/moderada exposición. Grupo 1 (n=131): alta exposición en todas las dimensiones, con brechas de hasta 2 puntos." data-en="Optimal silhouette = 0.567. Group 0 (n=264): low/moderate exposure. Group 1 (n=131): high exposure across all dimensions, with gaps of up to 2 points.">Silueta óptima = 0.567. Grupo 0 (n=264): baja/moderada exposición. Grupo 1 (n=131): alta exposición en todas las dimensiones, con brechas de hasta 2 puntos.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val">δ ≈ 0.58</span>
+            <p data-es="Tamaño de efecto Cliff en Respaldo del Equipo (3.25 vs 1.27) y Falta de Cohesión (3.35 vs 1.40) — discriminación práctica alta y estadísticamente significativa tras corrección FDR." data-en="Cliff's effect size in Team Support (3.25 vs 1.27) and Lack of Cohesion (3.35 vs 1.40) — high practical discrimination, statistically significant after FDR correction.">Tamaño de efecto Cliff en Respaldo del Equipo (3.25 vs 1.27) y Falta de Cohesión (3.35 vs 1.40) — discriminación práctica alta y estadísticamente significativa tras corrección FDR.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val">81.3%</span>
+            <p data-es="PC1 explica el 81.3% de la varianza total con cargas homogéneas en las 7 dimensiones: existe un factor general de exposición psicosocial global. PC2 (4.55%) captura un matiz independiente de la dimensión tecnológica." data-en="PC1 explains 81.3% of total variance with homogeneous loadings across 7 dimensions: a general global psychosocial exposure factor exists. PC2 (4.55%) captures an independent nuance from the technology dimension.">PC1 explica el 81.3% de la varianza total con cargas homogéneas en las 7 dimensiones: existe un factor general de exposición psicosocial global. PC2 (4.55%) captura un matiz independiente de la dimensión tecnológica.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Género" data-en="Gender">Género</span>
+            <p data-es="Mujeres (n=69) puntúan por encima de los hombres (n=326) en todas las dimensiones. Mayores brechas en Tecnología (2.23 vs 2.00) y Falta de Cohesión (2.20 vs 2.00)." data-en="Women (n=69) score above men (n=326) on all dimensions. Largest gaps in Technology (2.23 vs 2.00) and Lack of Cohesion (2.20 vs 2.00).">Mujeres (n=69) puntúan por encima de los hombres (n=326) en todas las dimensiones. Mayores brechas en Tecnología (2.23 vs 2.00) y Falta de Cohesión (2.20 vs 2.00).</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="col-label" data-es="Correlaciones Spearman (ajuste FDR)" data-en="Spearman correlations (FDR adjustment)">Correlaciones Spearman (ajuste FDR)</span>
+        <div class="corr-block">
+          <div class="corr-row"><span class="corr-vars" data-es="Cohesión ↔ Respaldo" data-en="Cohesion ↔ Support">Cohesión ↔ Respaldo</span><div class="corr-bar-wrap"><div class="corr-bar" style="width:85.8%"></div></div><span class="corr-val">0.858</span></div>
+          <div class="corr-row"><span class="corr-vars" data-es="Clima ↔ Cohesión" data-en="Climate ↔ Cohesion">Clima ↔ Cohesión</span><div class="corr-bar-wrap"><div class="corr-bar" style="width:79.3%"></div></div><span class="corr-val">0.793</span></div>
+          <div class="corr-row"><span class="corr-vars" data-es="Respaldo ↔ Liderazgo" data-en="Support ↔ Leadership">Respaldo ↔ Liderazgo</span><div class="corr-bar-wrap"><div class="corr-bar" style="width:78.9%"></div></div><span class="corr-val">0.789</span></div>
+          <div class="corr-row"><span class="corr-vars" data-es="Estructura ↔ Respaldo" data-en="Structure ↔ Support">Estructura ↔ Respaldo</span><div class="corr-bar-wrap"><div class="corr-bar" style="width:77.7%"></div></div><span class="corr-val">0.777</span></div>
+          <div class="corr-row"><span class="corr-vars" data-es="Tecnología ↔ Territorio" data-en="Technology ↔ Territory">Tecnología ↔ Territorio</span><div class="corr-bar-wrap"><div class="corr-bar" style="width:64.4%"></div></div><span class="corr-val">0.644</span></div>
+        </div>
+        <br>
+        <span class="col-label" data-es="Conclusión" data-en="Conclusion">Conclusión</span>
+        <div class="conclusion-strip" data-es="El núcleo relacional (cohesión–respaldo–liderazgo) actúa como el principal factor de riesgo y también como protector. Se confirma la aplicabilidad del modelo OIT-SST en contextos deportivos colombianos. Se recomienda priorizar intervenciones de liderazgo saludable y cohesión de equipo." data-en="The relational core (cohesion–support–leadership) acts as both the main risk factor and protective factor. The applicability of the ILO-OSH model in Colombian sports contexts is confirmed. Healthy leadership and team cohesion interventions are recommended.">El núcleo relacional (cohesión–respaldo–liderazgo) actúa como el principal factor de riesgo y también como protector. Se confirma la aplicabilidad del modelo OIT-SST en contextos deportivos colombianos. Se recomienda priorizar intervenciones de liderazgo saludable y cohesión de equipo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAPER 02 — Cualificación entrenadores Colombia          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="paper-card" data-category="salud coautor">
+  <div class="paper-top">
+    <div class="paper-number">02</div>
+    <div>
+      <div class="paper-meta">
+        <span class="meta-tag">2025</span>
+        <span class="meta-tag area">Deporte</span>
+        <span class="meta-tag area" data-es="Ciencias del Deporte" data-en="Sports Science">Ciencias del Deporte</span>
+      </div>
+      <span class="role-tag advisor" data-es="Asesor estadístico" data-en="Statistical advisor">Asesor estadístico</span>
+      <h2 class="paper-title" data-es="Entre academia y experiencia: cualificación de entrenadores en procesos de reserva deportiva en Colombia" data-en="Between academy and experience: coach qualification in sports reserve processes in Colombia">Entre academia y experiencia: cualificación de entrenadores en procesos de reserva deportiva en Colombia</h2>
+      <p class="paper-subtitle" data-es="Ministerio del Deporte — Escuela de Talentos · n = 210" data-en="Ministry of Sport — School of Talents · n = 210">Ministerio del Deporte — Escuela de Talentos · n = 210</p>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-num">210</span><span class="stat-label" data-es="Entrenadores" data-en="Coaches">Entrenadores</span></div>
+    <div class="stat-box"><span class="stat-num">3</span><span class="stat-label" data-es="Dimensiones" data-en="Dimensions">Dimensiones</span></div>
+    <div class="stat-box"><span class="stat-num">Nacional</span><span class="stat-label">Colombia</span></div>
+  </div>
+  <div class="summary-section">
+    <span class="col-label" data-es="Resumen" data-en="Abstract">Resumen</span>
+    <p class="col-text" data-es="Análisis de la cualificación de entrenadores de reserva deportiva en Colombia considerando tres dimensiones: académica, formación permanente y experiencial. La trayectoria como deportista predice mejor el desempeño del entrenador que la formación académica formal. Se identifican brechas de género, acceso a formación posgradual y condiciones socioeconómicas que limitan la consolidación del perfil profesional del entrenador colombiano." data-en="Analysis of sports reserve coach qualifications in Colombia considering three dimensions: academic, continuing education, and experiential. Athletic career path predicts coaching performance better than formal academic training. Gender gaps, postgraduate access, and socioeconomic conditions limiting the Colombian coach's professional profile are identified.">Análisis de la cualificación de entrenadores de reserva deportiva en Colombia considerando tres dimensiones: académica, formación permanente y experiencial. La trayectoria como deportista predice mejor el desempeño del entrenador que la formación académica formal. Se identifican brechas de género, acceso a formación posgradual y condiciones socioeconómicas que limitan la consolidación del perfil profesional del entrenador colombiano.</p>
+  </div>
+  <div class="methods-row"><span class="method-pill">R</span><span class="method-pill">Spearman rho</span><span class="method-pill">Kruskal-Wallis</span><span class="method-pill">Dunn post-hoc</span></div>
+  <div class="kw-row"><span class="kw" data-es="Cualificación" data-en="Qualification">Cualificación</span><span class="kw" data-es="Reserva deportiva" data-en="Sports reserve">Reserva deportiva</span><span class="kw" data-es="Entrenador" data-en="Coach">Entrenador</span><span class="kw">Colombia</span><span class="kw" data-es="Formación académica" data-en="Academic training">Formación académica</span></div>
+  <button class="deep-btn" onclick="toggleDeep('d02',this)">
+    <span data-es="Profundizar en hallazgos" data-en="Deep dive into findings">Profundizar en hallazgos</span><em class="arrow">↓</em>
+  </button>
+  <div class="deep-panel" id="d02">
+    <div class="deep-grid">
+      <div>
+        <span class="col-label" data-es="Hallazgos principales" data-en="Key findings">Hallazgos principales</span>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-val" data-es="Exp. &gt; Título" data-en="Exp. &gt; Degree">Exp. &gt; Título</span>
+            <p data-es="La trayectoria deportiva previa es el predictor más fuerte del desempeño como entrenador, superando al nivel de formación académica. Asociación significativa por rho de Spearman." data-en="Prior athletic career is the strongest predictor of coaching performance, exceeding academic training level. Significant association by Spearman's rho.">La trayectoria deportiva previa es el predictor más fuerte del desempeño como entrenador, superando al nivel de formación académica. Asociación significativa por rho de Spearman.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Brechas" data-en="Gaps">Brechas</span>
+            <p data-es="Desigualdades significativas en género, acceso a formación posgradual y condiciones socioeconómicas. Las diferencias entre grupos fueron confirmadas con prueba de Kruskal-Wallis y post-hoc de Dunn." data-en="Significant inequalities in gender, postgraduate access, and socioeconomic conditions. Group differences confirmed with Kruskal-Wallis and Dunn's post-hoc tests.">Desigualdades significativas en género, acceso a formación posgradual y condiciones socioeconómicas. Las diferencias entre grupos fueron confirmadas con prueba de Kruskal-Wallis y post-hoc de Dunn.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Multidim." data-en="Multidim.">Multidim.</span>
+            <p data-es="La cualificación es un proceso heterogéneo que no puede reducirse a un solo indicador. Combinar academia + experiencia competitiva + formación continua define el perfil más completo." data-en="Qualification is a heterogeneous process that cannot be reduced to a single indicator. Combining academy + competitive experience + continuing education defines the most complete profile.">La cualificación es un proceso heterogéneo que no puede reducirse a un solo indicador. Combinar academia + experiencia competitiva + formación continua define el perfil más completo.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="col-label" data-es="Conclusión" data-en="Conclusion">Conclusión</span>
+        <div class="conclusion-strip" data-es="Se requieren políticas que articulen formación académica, experiencia competitiva y desarrollo continuo. El acceso equitativo a oportunidades es clave para dignificar la profesión del entrenador y consolidar el relevo generacional en el deporte colombiano." data-en="Policies articulating academic training, competitive experience, and continuous development are needed. Equitable access to opportunities is key to dignifying the coaching profession and consolidating generational renewal in Colombian sports.">Se requieren políticas que articulen formación académica, experiencia competitiva y desarrollo continuo. El acceso equitativo a oportunidades es clave para dignificar la profesión del entrenador y consolidar el relevo generacional en el deporte colombiano.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAPER 03 — Burnout docentes Florencia (MBI + DASS)     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="paper-card" data-category="salud educacion">
+  <div class="paper-top">
+    <div class="paper-number">03</div>
+    <div>
+      <div class="paper-meta">
+        <span class="meta-tag">2025</span>
+        <span class="meta-tag area" data-es="Salud Mental" data-en="Mental Health">Salud Mental</span>
+        <span class="meta-tag area" data-es="Educación" data-en="Education">Educación</span>
+      </div>
+      <span class="role-tag advisor" data-es="Asesor estadístico" data-en="Statistical advisor">Asesor estadístico</span>
+      <h2 class="paper-title" data-es="Burnout y bienestar psicológico en docentes de instituciones públicas de Florencia, Caquetá" data-en="Burnout and psychological well-being in public school teachers in Florencia, Caquetá">Burnout y bienestar psicológico en docentes de instituciones públicas de Florencia, Caquetá</h2>
+      <p class="paper-subtitle" data-es="Instituciones educativas públicas · Florencia, Caquetá · N = 1,134" data-en="Public educational institutions · Florencia, Caquetá · N = 1,134">Instituciones educativas públicas · Florencia, Caquetá · N = 1,134</p>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-num">287</span><span class="stat-label" data-es="Muestra ajustada" data-en="Adjusted sample">Muestra ajustada</span></div>
+    <div class="stat-box"><span class="stat-num">1,134</span><span class="stat-label" data-es="Población total" data-en="Total population">Población total</span></div>
+    <div class="stat-box"><span class="stat-num">MBI-22</span><span class="stat-label" data-es="Instrumento Burnout" data-en="Burnout instrument">Burnout</span></div>
+    <div class="stat-box"><span class="stat-num">DASS-21</span><span class="stat-label" data-es="Instrumento bienestar" data-en="Well-being instrument">Bienestar</span></div>
+  </div>
+  <div class="summary-section">
+    <span class="col-label" data-es="Resumen" data-en="Abstract">Resumen</span>
+    <p class="col-text" data-es="Estudio cuantitativo que examina la correlación entre el síndrome de Burnout (MBI-22: agotamiento emocional, despersonalización, realización personal) y los niveles de ansiedad, depresión y estrés (DASS-21) en docentes de instituciones públicas de Florencia, Caquetá. Tamaño muestral calculado con la fórmula de Cochran y corrección para población finita. Análisis no paramétrico con correlaciones de Spearman entre las tres dimensiones de cada instrumento." data-en="Quantitative study examining the correlation between Burnout syndrome (MBI-22: emotional exhaustion, depersonalization, personal fulfillment) and anxiety, depression, and stress levels (DASS-21) in public school teachers in Florencia, Caquetá. Sample size calculated with Cochran's formula and finite population correction. Non-parametric analysis with Spearman correlations between the three dimensions of each instrument.">Estudio cuantitativo que examina la correlación entre el síndrome de Burnout (MBI-22: agotamiento emocional, despersonalización, realización personal) y los niveles de ansiedad, depresión y estrés (DASS-21) en docentes de instituciones públicas de Florencia, Caquetá. Tamaño muestral calculado con la fórmula de Cochran y corrección para población finita. Análisis no paramétrico con correlaciones de Spearman entre las tres dimensiones de cada instrumento.</p>
+  </div>
+  <div class="methods-row"><span class="method-pill">MBI-22</span><span class="method-pill">DASS-21</span><span class="method-pill">Spearman</span><span class="method-pill" data-es="Cochran (f. finita)" data-en="Cochran (finite pop.)">Cochran (f. finita)</span></div>
+  <div class="kw-row"><span class="kw">Burnout</span><span class="kw" data-es="Docentes" data-en="Teachers">Docentes</span><span class="kw">MBI-22</span><span class="kw">DASS-21</span><span class="kw">Caquetá</span></div>
+  <button class="deep-btn" onclick="toggleDeep('d03',this)">
+    <span data-es="Profundizar en hallazgos" data-en="Deep dive into findings">Profundizar en hallazgos</span><em class="arrow">↓</em>
+  </button>
+  <div class="deep-panel" id="d03">
+    <div class="deep-grid">
+      <div>
+        <span class="col-label" data-es="Diseño estadístico" data-en="Statistical design">Diseño estadístico</span>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-val">n=287</span>
+            <p data-es="Muestra calculada con Cochran (n∞=384) y corrección finita para N=1,134. Reducción del 25%: 287 registros necesarios con 95% de confianza y 5% de error máximo." data-en="Sample calculated with Cochran (n∞=384) and finite correction for N=1,134. 25% reduction: 287 records needed with 95% confidence and 5% maximum error.">Muestra calculada con Cochran (n∞=384) y corrección finita para N=1,134. Reducción del 25%: 287 registros necesarios con 95% de confianza y 5% de error máximo.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="9 corr." data-en="9 corr.">9 corr.</span>
+            <p data-es="Se analizan 9 correlaciones Spearman entre las 3 dimensiones del MBI-22 (agotamiento, despersonalización, realización) y las 3 del DASS-21 (ansiedad, depresión, estrés). La mayoría de la muestra no presenta indicios del síndrome." data-en="9 Spearman correlations analyzed between 3 MBI-22 dimensions (exhaustion, depersonalization, fulfillment) and 3 DASS-21 (anxiety, depression, stress). Most of the sample shows no signs of the syndrome.">Se analizan 9 correlaciones Spearman entre las 3 dimensiones del MBI-22 (agotamiento, despersonalización, realización) y las 3 del DASS-21 (ansiedad, depresión, estrés). La mayoría de la muestra no presenta indicios del síndrome.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Rol asesor" data-en="Advisor role">Rol asesor</span>
+            <p data-es="Cálculo muestral (Cochran + corrección finita), diseño del plan de análisis no paramétrico, definición de correlaciones entre dimensiones y estrategia de ajuste para comparaciones múltiples." data-en="Sample calculation (Cochran + finite correction), non-parametric analysis plan design, dimension correlation definition, and multiple comparison adjustment strategy.">Cálculo muestral (Cochran + corrección finita), diseño del plan de análisis no paramétrico, definición de correlaciones entre dimensiones y estrategia de ajuste para comparaciones múltiples.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="col-label" data-es="Contexto e implicaciones" data-en="Context and implications">Contexto e implicaciones</span>
+        <div class="conclusion-strip" data-es="En Colombia, docentes del sector público enfrentan cargas laborales elevadas. La correlación entre agotamiento emocional y síntomas de ansiedad/depresión puede informar intervenciones de bienestar institucional. El estudio aporta evidencia empírica para el diseño de políticas de salud mental en educación." data-en="In Colombia, public sector teachers face high workloads. The correlation between emotional exhaustion and anxiety/depression symptoms can inform institutional well-being interventions. The study provides empirical evidence for mental health policy design in education.">En Colombia, docentes del sector público enfrentan cargas laborales elevadas. La correlación entre agotamiento emocional y síntomas de ansiedad/depresión puede informar intervenciones de bienestar institucional. El estudio aporta evidencia empírica para el diseño de políticas de salud mental en educación.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAPER 04 — Smartphones bienestar U. Amazonia           -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="paper-card" data-category="salud educacion">
+  <div class="paper-top">
+    <div class="paper-number">04</div>
+    <div>
+      <div class="paper-meta">
+        <span class="meta-tag">2025</span>
+        <span class="meta-tag area" data-es="Salud Digital" data-en="Digital Health">Salud Digital</span>
+        <span class="meta-tag area" data-es="Educación Superior" data-en="Higher Education">Educación Superior</span>
+      </div>
+      <span class="role-tag advisor" data-es="Asesor estadístico" data-en="Statistical advisor">Asesor estadístico</span>
+      <h2 class="paper-title" data-es="Uso de smartphones y bienestar psicológico en estudiantes universitarios — fundamentos para un programa educativo en salud" data-en="Smartphone use and psychological well-being in university students — foundations for a health education program">Uso de smartphones y bienestar psicológico en estudiantes universitarios — fundamentos para un programa educativo en salud</h2>
+      <p class="paper-subtitle" data-es="Universidad de la Amazonia · n = 189" data-en="Universidad de la Amazonia · n = 189">Universidad de la Amazonia · n = 189</p>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-num">189</span><span class="stat-label" data-es="Estudiantes" data-en="Students">Estudiantes</span></div>
+    <div class="stat-box"><span class="stat-num">40.35</span><span class="stat-label" data-es="Media EDAS-18" data-en="EDAS-18 mean">Media EDAS-18</span></div>
+    <div class="stat-box"><span class="stat-num">33%</span><span class="stat-label" data-es="c/u alta / media / baja" data-en="each high / med / low">c/u alta/media/baja</span></div>
+  </div>
+  <div class="summary-section">
+    <span class="col-label" data-es="Resumen" data-en="Abstract">Resumen</span>
+    <p class="col-text" data-es="Estudio correlacional que evalúa la relación entre dependencia al smartphone (EDAS-18) y bienestar psicológico (DASS-21) en 189 estudiantes de la Universidad de la Amazonia. La muestra fue calculada para detectar un efecto medio (r=0.30) con potencia del 95%. Se aplicó corrección de Bonferroni para las 5 comparaciones múltiples (α ajustado=0.01). Los resultados del EDAS-18 muestran una distribución equilibrada entre niveles de dependencia baja, media y alta (~33% c/u), con promedio de 40.35 (DE=15.25). El estudio sienta las bases para un programa educativo en salud digital." data-en="Correlational study evaluating the relationship between smartphone dependence (EDAS-18) and psychological well-being (DASS-21) in 189 Universidad de la Amazonia students. Sample calculated to detect a medium effect (r=0.30) with 95% power. Bonferroni correction applied for 5 multiple comparisons (adjusted α=0.01). EDAS-18 results show a balanced distribution across low, medium, and high dependence levels (~33% each), with a mean of 40.35 (SD=15.25). The study lays the foundations for a digital health education program.">Estudio correlacional que evalúa la relación entre dependencia al smartphone (EDAS-18) y bienestar psicológico (DASS-21) en 189 estudiantes de la Universidad de la Amazonia. La muestra fue calculada para detectar un efecto medio (r=0.30) con potencia del 95%. Se aplicó corrección de Bonferroni para las 5 comparaciones múltiples (α ajustado=0.01). Los resultados del EDAS-18 muestran una distribución equilibrada entre niveles de dependencia baja, media y alta (~33% c/u), con promedio de 40.35 (DE=15.25). El estudio sienta las bases para un programa educativo en salud digital.</p>
+  </div>
+  <div class="methods-row"><span class="method-pill">DASS-21</span><span class="method-pill">EDAS-18</span><span class="method-pill">Spearman</span><span class="method-pill">Bonferroni</span><span class="method-pill" data-es="Análisis de potencia" data-en="Power analysis">Análisis de potencia</span><span class="method-pill" data-es="Percentiles p33/p66" data-en="Percentiles p33/p66">Percentiles p33/p66</span></div>
+  <div class="kw-row"><span class="kw">Smartphone</span><span class="kw" data-es="Bienestar psicológico" data-en="Psychological well-being">Bienestar psicológico</span><span class="kw">DASS-21</span><span class="kw">EDAS-18</span><span class="kw" data-es="Salud digital" data-en="Digital health">Salud digital</span></div>
+  <button class="deep-btn" onclick="toggleDeep('d04',this)">
+    <span data-es="Profundizar en hallazgos" data-en="Deep dive into findings">Profundizar en hallazgos</span><em class="arrow">↓</em>
+  </button>
+  <div class="deep-panel" id="d04">
+    <div class="deep-grid">
+      <div>
+        <span class="col-label" data-es="Hallazgos del EDAS-18" data-en="EDAS-18 findings">Hallazgos del EDAS-18</span>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-val">33.86%</span>
+            <p data-es="Alta dependencia al smartphone (por encima del percentil 66). 32.80% dependencia media y 33.33% baja. Distribución equilibrada que justifica análisis en los tres grupos." data-en="High smartphone dependence (above the 66th percentile). 32.80% medium dependence and 33.33% low. Balanced distribution that justifies analysis across three groups.">Alta dependencia al smartphone (por encima del percentil 66). 32.80% dependencia media y 33.33% baja. Distribución equilibrada que justifica análisis en los tres grupos.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val">α=0.01</span>
+            <p data-es="Nivel de significancia ajustado por Bonferroni (α original / 5 comparaciones). Garantiza control del error tipo I en las correlaciones simultáneas EDAS-18 × tres subescalas DASS-21." data-en="Significance level adjusted by Bonferroni (original α / 5 comparisons). Ensures Type I error control in simultaneous EDAS-18 × three DASS-21 subscale correlations.">Nivel de significancia ajustado por Bonferroni (α original / 5 comparaciones). Garantiza control del error tipo I en las correlaciones simultáneas EDAS-18 × tres subescalas DASS-21.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Rol asesor" data-en="Advisor role">Rol asesor</span>
+            <p data-es="Cálculo de potencia estadística (r esperado=0.30, β=95%), corrección de Bonferroni para múltiples comparaciones y definición de puntos de corte percentilar para categorización de resultados EDAS-18." data-en="Statistical power calculation (expected r=0.30, β=95%), Bonferroni correction for multiple comparisons, and percentile cutpoint definition for EDAS-18 results categorization.">Cálculo de potencia estadística (r esperado=0.30, β=95%), corrección de Bonferroni para múltiples comparaciones y definición de puntos de corte percentilar para categorización de resultados EDAS-18.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="col-label" data-es="Conclusión" data-en="Conclusion">Conclusión</span>
+        <div class="conclusion-strip" data-es="La distribución equilibrada entre niveles de dependencia indica que el problema afecta de forma extendida a la comunidad universitaria. Los resultados proveen evidencia empírica para diseñar un programa educativo en salud digital orientado a promover el bienestar y desarrollar habilidades de autorregulación tecnológica." data-en="The balanced distribution across dependence levels indicates the problem extensively affects the university community. Results provide empirical evidence to design a digital health education program promoting well-being and developing technology self-regulation skills.">La distribución equilibrada entre niveles de dependencia indica que el problema afecta de forma extendida a la comunidad universitaria. Los resultados proveen evidencia empírica para diseñar un programa educativo en salud digital orientado a promover el bienestar y desarrollar habilidades de autorregulación tecnológica.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAPER 05 — Bibliométrico pantallas/redes 9704 docs     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="paper-card" data-category="bibliometria salud">
+  <div class="paper-top">
+    <div class="paper-number">05</div>
+    <div>
+      <div class="paper-meta">
+        <span class="meta-tag">2024–2025</span>
+        <span class="meta-tag area" data-es="Bibliometría" data-en="Bibliometrics">Bibliometría</span>
+        <span class="meta-tag area" data-es="Salud Digital" data-en="Digital Health">Salud Digital</span>
+      </div>
+      <span class="role-tag advisor" data-es="Asesor estadístico" data-en="Statistical advisor">Asesor estadístico</span>
+      <h2 class="paper-title" data-es="Análisis bibliométrico: exposición a pantallas y redes sociales — salud física y mental" data-en="Bibliometric analysis: screen and social media exposure — physical and mental health">Análisis bibliométrico: exposición a pantallas y redes sociales — salud física y mental</h2>
+      <p class="paper-subtitle" data-es="Base Scopus · 9,704 documentos" data-en="Scopus database · 9,704 documents">Base Scopus · 9,704 documentos</p>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-num">9,704</span><span class="stat-label" data-es="Documentos Scopus" data-en="Scopus documents">Documentos</span></div>
+    <div class="stat-box"><span class="stat-num">8</span><span class="stat-label" data-es="Análisis producidos" data-en="Analyses produced">Análisis</span></div>
+    <div class="stat-box"><span class="stat-num">MCA</span><span class="stat-label" data-es="Estructura conceptual" data-en="Conceptual structure">Estructura conceptual</span></div>
+  </div>
+  <div class="summary-section">
+    <span class="col-label" data-es="Resumen" data-en="Abstract">Resumen</span>
+    <p class="col-text" data-es="Análisis bibliométrico exhaustivo sobre la relación entre redes sociales, salud física y mental, basado en 9,704 documentos de Scopus. Se identificó la evolución temática desde enfoques conductuales y de salud mental hacia la incorporación de machine learning y procesamiento de lenguaje natural. EE.UU., Reino Unido y China lideran la producción científica. Líneas emergentes: impacto del COVID-19 e inteligencia artificial en la interacción humano-digital." data-en="Comprehensive bibliometric analysis on the relationship between social media and physical and mental health, based on 9,704 Scopus documents. Thematic evolution identified from behavioral and mental health approaches toward machine learning and natural language processing. USA, UK, and China lead scientific production. Emerging lines: COVID-19 impact and AI in human-digital interaction.">Análisis bibliométrico exhaustivo sobre la relación entre redes sociales, salud física y mental, basado en 9,704 documentos de Scopus. Se identificó la evolución temática desde enfoques conductuales y de salud mental hacia la incorporación de machine learning y procesamiento de lenguaje natural. EE.UU., Reino Unido y China lideran la producción científica. Líneas emergentes: impacto del COVID-19 e inteligencia artificial en la interacción humano-digital.</p>
+  </div>
+  <div class="methods-row"><span class="method-pill">R · Bibliometrix</span><span class="method-pill">Biblioshiny</span><span class="method-pill">Scopus</span><span class="method-pill">MCA</span><span class="method-pill">WordCloud</span><span class="method-pill" data-es="Mapa temático" data-en="Thematic map">Mapa temático</span><span class="method-pill" data-es="Evolución temática" data-en="Thematic evolution">Evolución temática</span></div>
+  <div class="kw-row"><span class="kw" data-es="Redes sociales" data-en="Social media">Redes sociales</span><span class="kw" data-es="Salud mental" data-en="Mental health">Salud mental</span><span class="kw" data-es="Bibliometría" data-en="Bibliometrics">Bibliometría</span><span class="kw">Scopus</span><span class="kw">NLP</span><span class="kw">COVID-19</span></div>
+  <button class="deep-btn" onclick="toggleDeep('d05',this)">
+    <span data-es="Profundizar en hallazgos" data-en="Deep dive into findings">Profundizar en hallazgos</span><em class="arrow">↓</em>
+  </button>
+  <div class="deep-panel" id="d05">
+    <div class="deep-grid">
+      <div>
+        <span class="col-label" data-es="Hallazgos principales" data-en="Key findings">Hallazgos principales</span>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-val" data-es="Evolución" data-en="Evolution">Evolución</span>
+            <p data-es="Transición clara desde enfoques conductuales (comportamiento y salud mental) hacia ML, NLP y análisis de sentimientos. Las últimas publicaciones integran IA para modelar dinámicas de interacción humano-digital a escala." data-en="Clear transition from behavioral approaches (behavior and mental health) toward ML, NLP, and sentiment analysis. Latest publications integrate AI to model human-digital interaction dynamics at scale.">Transición clara desde enfoques conductuales (comportamiento y salud mental) hacia ML, NLP y análisis de sentimientos. Las últimas publicaciones integran IA para modelar dinámicas de interacción humano-digital a escala.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Disparidad" data-en="Disparity">Disparidad</span>
+            <p data-es="Colaboraciones internacionales significativas pero con disparidades Norte-Sur. EE.UU., UK y China concentran la producción. Latinoamérica y África tienen participación marginal, lo que limita la representatividad de los hallazgos." data-en="Significant international collaborations but with North-South disparities. USA, UK, and China concentrate production. Latin America and Africa have marginal participation, limiting the representativeness of findings.">Colaboraciones internacionales significativas pero con disparidades Norte-Sur. EE.UU., UK y China concentran la producción. Latinoamérica y África tienen participación marginal, lo que limita la representatividad de los hallazgos.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Emergente" data-en="Emerging">Emergente</span>
+            <p data-es="COVID-19 actuó como acelerador de publicaciones en 2020–2022 y abrió la línea de salud mental en confinamiento y uso intensivo de redes. MCA revela estructura conceptual multidimensional con núcleos diferenciados." data-en="COVID-19 acted as a publication accelerator in 2020–2022 and opened the mental health in lockdown and intensive social media use line. MCA reveals multidimensional conceptual structure with differentiated cores.">COVID-19 actuó como acelerador de publicaciones en 2020–2022 y abrió la línea de salud mental en confinamiento y uso intensivo de redes. MCA revela estructura conceptual multidimensional con núcleos diferenciados.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="col-label" data-es="Análisis realizados" data-en="Analyses performed">Análisis realizados</span>
+        <div class="findings-list">
+          <div class="finding-item"><span class="finding-val" data-es="Producción" data-en="Production">Producción</span><p data-es="Producción anual, citaciones promedio, top países, top documentos más citados, top revistas por H-index." data-en="Annual production, average citations, top countries, top cited documents, top journals by H-index.">Producción anual, citaciones promedio, top países, top documentos más citados, top revistas por H-index.</p></div>
+          <div class="finding-item"><span class="finding-val" data-es="Estructura" data-en="Structure">Estructura</span><p data-es="WordCloud de palabras clave, Mapa Temático por cuadrantes, Evolución Temática por periodos, MCA de estructura conceptual." data-en="Keyword WordCloud, Thematic Map by quadrants, Thematic Evolution by periods, MCA of conceptual structure.">WordCloud de palabras clave, Mapa Temático por cuadrantes, Evolución Temática por periodos, MCA de estructura conceptual.</p></div>
+        </div>
+        <br>
+        <div class="conclusion-strip" data-es="El campo requiere mayor integración de IA y NLP en estudios de salud digital. La brecha Norte-Sur en producción científica es una oportunidad para investigación regional con perspectiva propia. Se recomiendan colaboraciones internacionales más equitativas." data-en="The field requires greater integration of AI and NLP in digital health studies. The North-South gap in scientific production is an opportunity for regional research with its own perspective. More equitable international collaborations are recommended.">El campo requiere mayor integración de IA y NLP en estudios de salud digital. La brecha Norte-Sur en producción científica es una oportunidad para investigación regional con perspectiva propia. Se recomiendan colaboraciones internacionales más equitativas.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAPER 06 — Bienestar docente bibliométrico 736 docs    -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="paper-card" data-category="bibliometria educacion">
+  <div class="paper-top">
+    <div class="paper-number">06</div>
+    <div>
+      <div class="paper-meta">
+        <span class="meta-tag">2024–2025</span>
+        <span class="meta-tag area" data-es="Educación" data-en="Education">Educación</span>
+        <span class="meta-tag area" data-es="Bibliometría" data-en="Bibliometrics">Bibliometría</span>
+      </div>
+      <span class="role-tag advisor" data-es="Asesor estadístico" data-en="Statistical advisor">Asesor estadístico</span>
+      <h2 class="paper-title" data-es="Bienestar docente: análisis bibliométrico de la producción científica global (2002–2024)" data-en="Teacher well-being: bibliometric analysis of global scientific output (2002–2024)">Bienestar docente: análisis bibliométrico de la producción científica global (2002–2024)</h2>
+      <p class="paper-subtitle" data-es="Base Scopus · 736 documentos · 2002–2024" data-en="Scopus database · 736 documents · 2002–2024">Base Scopus · 736 documentos · 2002–2024</p>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-num">736</span><span class="stat-label" data-es="Documentos" data-en="Documents">Documentos</span></div>
+    <div class="stat-box"><span class="stat-num">2002–24</span><span class="stat-label" data-es="Período" data-en="Period">Período</span></div>
+    <div class="stat-box"><span class="stat-num">10</span><span class="stat-label" data-es="Clusters temáticos" data-en="Thematic clusters">Clusters</span></div>
+    <div class="stat-box"><span class="stat-num">Scopus</span><span class="stat-label" data-es="Fuente" data-en="Source">Fuente</span></div>
+  </div>
+  <div class="summary-section">
+    <span class="col-label" data-es="Resumen" data-en="Abstract">Resumen</span>
+    <p class="col-text" data-es="Análisis bibliométrico de la producción científica sobre bienestar docente (2002–2024). Crecimiento exponencial desde 2012 con pico en 2023. El mapa temático identifica 10 clusters distribuidos en 4 cuadrantes: salud mental, apoyo social, estrés laboral y resiliencia como Motor Themes. Australia, UK y Canadá lideran colaboraciones internacionales. Latinoamérica permanece subrepresentada, señalando una oportunidad de investigación regional." data-en="Bibliometric analysis of teacher well-being scientific output (2002–2024). Exponential growth since 2012 with peak in 2023. Thematic map identifies 10 clusters across 4 quadrants: mental health, social support, occupational stress, and resilience as Motor Themes. Australia, UK, and Canada lead international collaborations. Latin America remains underrepresented, signaling a regional research opportunity.">Análisis bibliométrico de la producción científica sobre bienestar docente (2002–2024). Crecimiento exponencial desde 2012 con pico en 2023. El mapa temático identifica 10 clusters distribuidos en 4 cuadrantes: salud mental, apoyo social, estrés laboral y resiliencia como Motor Themes. Australia, UK y Canadá lideran colaboraciones internacionales. Latinoamérica permanece subrepresentada, señalando una oportunidad de investigación regional.</p>
+  </div>
+  <div class="methods-row"><span class="method-pill">R 4.4.0</span><span class="method-pill">Bibliometrix</span><span class="method-pill">Biblioshiny</span><span class="method-pill">Scopus</span><span class="method-pill" data-es="Mapa temático" data-en="Thematic map">Mapa temático</span><span class="method-pill" data-es="Búsqueda booleana" data-en="Boolean search">Búsqueda booleana</span></div>
+  <div class="kw-row"><span class="kw" data-es="Bienestar docente" data-en="Teacher well-being">Bienestar docente</span><span class="kw" data-es="Salud mental" data-en="Mental health">Salud mental</span><span class="kw" data-es="Estrés laboral" data-en="Occupational stress">Estrés laboral</span><span class="kw" data-es="Bibliometría" data-en="Bibliometrics">Bibliometría</span></div>
+  <button class="deep-btn" onclick="toggleDeep('d06',this)">
+    <span data-es="Profundizar en hallazgos" data-en="Deep dive into findings">Profundizar en hallazgos</span><em class="arrow">↓</em>
+  </button>
+  <div class="deep-panel" id="d06">
+    <div class="deep-grid">
+      <div>
+        <span class="col-label" data-es="Hallazgos principales" data-en="Key findings">Hallazgos principales</span>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-val" data-es="Crecim." data-en="Growth">Crecim.</span>
+            <p data-es="De 1–3 publicaciones anuales entre 2002–2008 a crecimiento exponencial desde 2012. 2023 fue el año con mayor producción. Refleja creciente preocupación global por la salud mental docente." data-en="From 1–3 annual publications between 2002–2008 to exponential growth since 2012. 2023 was the highest-production year. Reflects growing global concern for teacher mental health.">De 1–3 publicaciones anuales entre 2002–2008 a crecimiento exponencial desde 2012. 2023 fue el año con mayor producción. Refleja creciente preocupación global por la salud mental docente.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Motor T." data-en="Motor T.">Motor T.</span>
+            <p data-es="Los 4 Motor Themes (alta centralidad y alta densidad): salud mental, apoyo social, estrés laboral y resiliencia. Son los ejes consolidados del campo con mayor potencial de influencia futura." data-en="4 Motor Themes (high centrality and high density): mental health, social support, occupational stress, and resilience. These are the consolidated axes with the greatest future influence potential.">Los 4 Motor Themes (alta centralidad y alta densidad): salud mental, apoyo social, estrés laboral y resiliencia. Son los ejes consolidados del campo con mayor potencial de influencia futura.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="LATAM" data-en="LATAM">LATAM</span>
+            <p data-es="Latinoamérica subrepresentada en comparación con Australia, UK, Canadá y EE.UU. Esta brecha representa una oportunidad: publicaciones desde contextos regionales tienen impacto diferencial en la literatura." data-en="Latin America underrepresented compared to Australia, UK, Canada, and USA. This gap represents an opportunity: publications from regional contexts have differential impact in the literature.">Latinoamérica subrepresentada en comparación con Australia, UK, Canadá y EE.UU. Esta brecha representa una oportunidad: publicaciones desde contextos regionales tienen impacto diferencial en la literatura.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="col-label" data-es="Conclusión" data-en="Conclusion">Conclusión</span>
+        <div class="conclusion-strip" data-es="El campo del bienestar docente está en rápida expansión. La dominancia de países anglófonos en la producción científica y la ausencia de perspectivas latinoamericanas señala una brecha que este tipo de investigaciones contribuye a cerrar. Se recomienda fortalecer colaboraciones regionales y publicar en revistas indexadas de habla hispana." data-en="The teacher well-being field is rapidly expanding. The dominance of English-speaking countries in scientific production and the absence of Latin American perspectives signals a gap that this type of research contributes to closing. Regional collaborations and publishing in indexed Spanish-language journals are recommended.">El campo del bienestar docente está en rápida expansión. La dominancia de países anglófonos en la producción científica y la ausencia de perspectivas latinoamericanas señala una brecha que este tipo de investigaciones contribuye a cerrar. Se recomienda fortalecer colaboraciones regionales y publicar en revistas indexadas de habla hispana.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAPER 07 — Estadística en decisiones educativas        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="paper-card" data-category="bibliometria educacion">
+  <div class="paper-top">
+    <div class="paper-number">07</div>
+    <div>
+      <div class="paper-meta">
+        <span class="meta-tag status-complete" data-es="Completo" data-en="Complete">Completo</span>
+        <span class="meta-tag">2024–2025</span>
+        <span class="meta-tag area" data-es="Educación" data-en="Education">Educación</span>
+        <span class="meta-tag area" data-es="Bibliometría" data-en="Bibliometrics">Bibliometría</span>
+      </div>
+      <span class="role-tag" data-es="Autor" data-en="Author">Coautor</span>
+      <h2 class="paper-title" data-es="El impacto de la estadística en la toma de decisiones educativas: evolución temática 2000–2024" data-en="The impact of statistics on educational decision-making: thematic evolution 2000–2024">El impacto de la estadística en la toma de decisiones educativas: evolución temática 2000–2024</h2>
+      <p class="paper-subtitle" data-es="Base Scopus · 736 documentos · 2000–2024" data-en="Scopus database · 736 documents · 2000–2024">Base Scopus · 736 documentos · 2000–2024</p>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-num">736</span><span class="stat-label" data-es="Documentos" data-en="Documents">Documentos</span></div>
+    <div class="stat-box"><span class="stat-num">2000–24</span><span class="stat-label" data-es="Período" data-en="Period">Período</span></div>
+    <div class="stat-box"><span class="stat-num">Scopus</span><span class="stat-label" data-es="Fuente" data-en="Source">Fuente</span></div>
+  </div>
+  <div class="summary-section">
+    <span class="col-label" data-es="Resumen" data-en="Abstract">Resumen</span>
+    <p class="col-text" data-es="Análisis bibliométrico sobre la estadística aplicada a la toma de decisiones educativas (2000–2024). Se observa una transición desde enfoques tradicionales — evaluación del rendimiento académico y planificación educativa — hacia la adopción de metodologías avanzadas: minería de datos, machine learning y sistemas de monitoreo dinámico. Persisten brechas entre los hallazgos de la investigación y su aplicación práctica en las instituciones. Los temas emergentes como el análisis de sentimientos y la personalización del aprendizaje representan un potencial transformador." data-en="Bibliometric analysis of statistics applied to educational decision-making (2000–2024). A transition from traditional approaches — academic performance evaluation and educational planning — to advanced methodologies: data mining, machine learning, and dynamic monitoring systems is observed. Gaps between research findings and practical institutional application persist. Emerging topics such as sentiment analysis and learning personalization represent transformative potential.">Análisis bibliométrico sobre la estadística aplicada a la toma de decisiones educativas (2000–2024). Se observa una transición desde enfoques tradicionales — evaluación del rendimiento académico y planificación educativa — hacia la adopción de metodologías avanzadas: minería de datos, machine learning y sistemas de monitoreo dinámico. Persisten brechas entre los hallazgos de la investigación y su aplicación práctica en las instituciones. Los temas emergentes como el análisis de sentimientos y la personalización del aprendizaje representan un potencial transformador.</p>
+  </div>
+  <div class="methods-row"><span class="method-pill">R 4.4.0</span><span class="method-pill">Bibliometrix</span><span class="method-pill">Biblioshiny</span><span class="method-pill">Scopus</span><span class="method-pill" data-es="Clusterización keywords" data-en="Keyword clustering">Clusterización keywords</span><span class="method-pill" data-es="Evolución temática" data-en="Thematic evolution">Evolución temática</span></div>
+  <div class="kw-row"><span class="kw" data-es="Estadística educativa" data-en="Educational statistics">Estadística educativa</span><span class="kw" data-es="Minería de datos" data-en="Data mining">Minería de datos</span><span class="kw" data-es="Toma de decisiones" data-en="Decision-making">Toma de decisiones</span><span class="kw">Machine Learning</span><span class="kw" data-es="Personalización" data-en="Personalization">Personalización</span></div>
+  <button class="deep-btn" onclick="toggleDeep('d07',this)">
+    <span data-es="Profundizar en hallazgos" data-en="Deep dive into findings">Profundizar en hallazgos</span><em class="arrow">↓</em>
+  </button>
+  <div class="deep-panel" id="d07">
+    <div class="deep-grid">
+      <div>
+        <span class="col-label" data-es="Hallazgos principales" data-en="Key findings">Hallazgos principales</span>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-val" data-es="Transición" data-en="Transition">Transición</span>
+            <p data-es="Desde evaluación académica y planificación (dominantes hasta 2015) hacia ML, minería de datos y monitoreo dinámico (emergentes desde 2018). Análisis de sentimientos y personalización del aprendizaje son las líneas con mayor crecimiento." data-en="From academic evaluation and planning (dominant until 2015) toward ML, data mining, and dynamic monitoring (emerging since 2018). Sentiment analysis and learning personalization are the fastest-growing lines.">Desde evaluación académica y planificación (dominantes hasta 2015) hacia ML, minería de datos y monitoreo dinámico (emergentes desde 2018). Análisis de sentimientos y personalización del aprendizaje son las líneas con mayor crecimiento.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Brecha" data-en="Gap">Brecha</span>
+            <p data-es="Desconexión persistente entre hallazgos de investigación y aplicación en instituciones educativas reales. La limitada capacitación docente y la falta de infraestructura tecnológica son barreras identificadas." data-en="Persistent disconnect between research findings and application in real educational institutions. Limited teacher training and lack of technological infrastructure are identified barriers.">Desconexión persistente entre hallazgos de investigación y aplicación en instituciones educativas reales. La limitada capacitación docente y la falta de infraestructura tecnológica son barreras identificadas.</p>
+          </div>
+          <div class="finding-item">
+            <span class="finding-val" data-es="Rol asesor" data-en="Advisor role">Rol asesor</span>
+            <p data-es="Asesoría en diseño metodológico del análisis bibliométrico, implementación en R con Bibliometrix y revisión de la interpretación del mapa temático y análisis de clusterización de palabras clave." data-en="Advisory in bibliometric analysis methodological design, R implementation with Bibliometrix, and review of thematic map interpretation and keyword clustering analysis.">Asesoría en diseño metodológico del análisis bibliométrico, implementación en R con Bibliometrix y revisión de la interpretación del mapa temático y análisis de clusterización de palabras clave.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="col-label" data-es="Conclusión" data-en="Conclusion">Conclusión</span>
+        <div class="conclusion-strip" data-es="La estadística y la tecnología son herramientas fundamentales para mejorar la toma de decisiones educativas. Se necesita un enfoque interdisciplinario que combine estadística, ciencia de datos y pedagogía. Priorizar investigación aplicada con impacto directo en la práctica educativa y políticas que garanticen el uso ético de los datos." data-en="Statistics and technology are fundamental tools for improving educational decision-making. An interdisciplinary approach combining statistics, data science, and pedagogy is needed. Prioritizing applied research with direct impact on educational practice and policies ensuring ethical data use are key.">La estadística y la tecnología son herramientas fundamentales para mejorar la toma de decisiones educativas. Se necesita un enfoque interdisciplinario que combine estadística, ciencia de datos y pedagogía. Priorizar investigación aplicada con impacto directo en la práctica educativa y políticas que garanticen el uso ético de los datos.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span data-es="© 2025 Yeferson Andres Velazco · Estadístico · Universidad Nacional de Colombia" data-en="© 2025 Yeferson Andres Velazco · Statistician · Universidad Nacional de Colombia">© 2025 Yeferson Andres Velazco · Estadístico · Universidad Nacional de Colombia</span>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const v = el.getAttribute('data-' + lang);
+    if (v !== null) el.innerHTML = v;
+  });
+  document.documentElement.lang = lang;
+}
+
+function filterCards(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.paper-card').forEach(card => {
+    const cats = card.getAttribute('data-category') || '';
+    card.classList.toggle('hidden', cat !== 'all' && !cats.includes(cat));
+  });
+}
+
+function toggleDeep(id, btn) {
+  const panel = document.getElementById(id);
+  const isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  const label = btn.querySelector('span');
+  if (label) {
+    const isEs = document.documentElement.lang !== 'en';
+    label.textContent = isOpen
+      ? (isEs ? 'Profundizar en hallazgos' : 'Deep dive into findings')
+      : (isEs ? 'Ocultar detalle' : 'Hide detail');
+  }
+}
+</script>
+</body>
+</html>
