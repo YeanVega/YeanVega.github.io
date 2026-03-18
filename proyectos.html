@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos — Yeferson Andres Velazco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1a1a18; --ink-2: #4a4a46; --ink-3: #8a8a84;
+  --paper: #f8f6f1; --paper-2: #efecea; --rule: #d8d5cf;
+  --accent: #1d4a6e; --accent-light: #e6f0f8;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.7; font-weight: 300; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(248,246,241,0.93); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 clamp(1.5rem,5vw,4rem); height: 60px;
+}
+.nav-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); font-weight: 500; }
+.lang-toggle { display: flex; border: 1px solid var(--rule); overflow: hidden; }
+.lang-btn { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; padding: 0.35rem 0.8rem; cursor: pointer; border: none; background: transparent; color: var(--ink-3); font-family: var(--sans); transition: background 0.15s, color 0.15s; }
+.lang-btn.active { background: var(--accent); color: #fff; }
+.lang-btn:not(.active):hover { background: var(--paper-2); color: var(--ink); }
+
+/* ── PAGE HERO ── */
+.page-hero { padding: 8rem clamp(1.5rem,8vw,10rem) 4rem; max-width: 1100px; margin: 0 auto; }
+.back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; font-weight: 500; margin-bottom: 2.5rem; opacity: 0.8; transition: opacity 0.2s; }
+.back-link:hover { opacity: 1; }
+.eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 1rem; display: block; }
+.page-hero h1 { font-family: var(--serif); font-size: clamp(2.2rem,4vw,3.4rem); font-weight: 400; color: var(--ink); line-height: 1.1; margin-bottom: 1.5rem; }
+.page-hero > p { font-size: 1rem; color: var(--ink-2); max-width: 58ch; font-weight: 300; line-height: 1.8; }
+
+.divider { border: none; border-top: 1px solid var(--rule); max-width: 1100px; margin: 0 auto; }
+
+/* ── PROJECT CARD ── */
+.project-section { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.5rem,8vw,10rem); }
+
+.proj-card { border-bottom: 1px solid var(--rule); padding: 3.5rem 0; }
+.proj-card:last-child { border-bottom: none; }
+
+.proj-top { display: grid; grid-template-columns: 4rem 1fr; gap: 2rem; align-items: start; margin-bottom: 1.75rem; }
+.proj-num { font-family: var(--serif); font-size: 3.5rem; color: var(--rule); line-height: 1; font-weight: 400; }
+.proj-meta { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.7rem; }
+.proj-badge { font-size: 0.68rem; padding: 0.18rem 0.6rem; border: 1px solid var(--rule); color: var(--ink-3); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+.proj-badge.tech { background: var(--accent-light); border-color: #b8d0e6; color: var(--accent); }
+.proj-title { font-family: var(--serif); font-size: clamp(1.2rem,2.2vw,1.6rem); font-weight: 400; color: var(--ink); line-height: 1.25; margin-bottom: 0.35rem; }
+.proj-sub { font-size: 0.85rem; color: var(--ink-3); font-weight: 300; }
+
+.proj-desc { font-size: 0.92rem; color: var(--ink-2); line-height: 1.85; font-weight: 300; margin-bottom: 1.5rem; max-width: 72ch; }
+
+/* feature pills */
+.feature-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.75rem; }
+.feature { font-size: 0.75rem; padding: 0.3rem 0.75rem; background: var(--paper-2); border: 1px solid var(--rule); color: var(--ink-2); }
+
+/* demo toggle button */
+.demo-btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-weight: 500; color: var(--accent); background: transparent;
+  border: 1px solid var(--accent); padding: 0.55rem 1.1rem;
+  cursor: pointer; font-family: var(--sans); transition: all 0.15s;
+  user-select: none;
+}
+.demo-btn:hover { background: var(--accent); color: #fff; }
+.demo-btn .arr { transition: transform 0.25s; display: inline-block; }
+.demo-btn.open .arr { transform: rotate(180deg); }
+
+/* demo panel wrapper */
+.demo-panel { display: none; margin-top: 2rem; border: 1px solid var(--rule); overflow: hidden; }
+.demo-panel.open { display: block; }
+.demo-label {
+  padding: 0.6rem 1.25rem;
+  background: var(--ink);
+  font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: #6a6a64; font-family: var(--sans); font-weight: 500;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.demo-label span { color: #4a4a46; }
+.demo-iframe-wrap { width: 100%; height: 620px; overflow: hidden; position: relative; }
+.demo-iframe-wrap iframe { width: 100%; height: 100%; border: none; display: block; background: #f7f7f5; }
+
+footer { text-align: center; padding: 2.5rem; font-size: 0.78rem; color: var(--ink-3); border-top: 1px solid var(--rule); background: var(--paper); margin-top: 1rem; }
+
+@media (max-width: 700px) {
+  .proj-top { grid-template-columns: 1fr; gap: 0.25rem; }
+  .proj-num { font-size: 2.5rem; }
+  .nav-links { display: none; }
+  .demo-iframe-wrap { height: 480px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Yeferson Velazco</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html" data-es="Portafolio" data-en="Portfolio">Portafolio</a></li>
+      <li><a href="investigacion.html" data-es="Investigación" data-en="Research">Investigación</a></li>
+      <li><a href="proyectos.html" class="active" data-es="Proyectos" data-en="Projects">Proyectos</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <a href="index.html" class="back-link">← <span data-es="Volver al portafolio" data-en="Back to portfolio">Volver al portafolio</span></a>
+  <span class="eyebrow" data-es="Desarrollos propios" data-en="Own developments">Desarrollos propios</span>
+  <h1 data-es="Proyectos &amp; Herramientas" data-en="Projects &amp; Tools">Proyectos &amp; Herramientas</h1>
+  <p data-es="Herramientas analíticas y aplicaciones construidas para resolver problemas reales. Cada proyecto incluye una demo interactiva que puedes explorar directamente aquí." data-en="Analytical tools and applications built to solve real problems. Each project includes an interactive demo you can explore directly here.">Herramientas analíticas y aplicaciones construidas para resolver problemas reales. Cada proyecto incluye una demo interactiva que puedes explorar directamente aquí.</p>
+</div>
+
+<hr class="divider">
+
+<div class="project-section">
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PROYECTO 01 — Task Monitor                 -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="proj-card">
+    <div class="proj-top">
+      <div class="proj-num">01</div>
+      <div>
+        <div class="proj-meta">
+          <span class="proj-badge">2025–2026</span>
+          <span class="proj-badge tech">Python</span>
+          <span class="proj-badge tech">Automatización</span>
+          <span class="proj-badge tech">HTML</span>
+        </div>
+        <h2 class="proj-title" data-es="Task Monitor — Seguimiento de tareas automatizadas" data-en="Task Monitor — Automated task tracking dashboard">Task Monitor — Seguimiento de tareas automatizadas</h2>
+        <p class="proj-sub" data-es="Dashboard de monitoreo para pipelines Python en producción" data-en="Monitoring dashboard for Python pipelines in production">Dashboard de monitoreo para pipelines Python en producción</p>
+      </div>
+    </div>
+
+    <p class="proj-desc" data-es="Herramienta de monitoreo en tiempo real diseñada para supervisar el estado de tareas programadas y pipelines de procesamiento automatizados en entornos Python/Windows. Muestra el estado de ejecución de cada tarea (completada, con error, detenida o pendiente), el progreso de sub-procesos, los logs de ejecución y los tracebacks de errores — todo desde un único HTML generado automáticamente al final de cada ciclo de procesamiento." data-en="Real-time monitoring tool designed to supervise the status of scheduled tasks and automated processing pipelines in Python/Windows environments. It displays the execution status of each task (completed, error, stopped, or pending), subprocess progress, execution logs, and error tracebacks — all from a single HTML file automatically generated at the end of each processing cycle.">Herramienta de monitoreo en tiempo real diseñada para supervisar el estado de tareas programadas y pipelines de procesamiento automatizados en entornos Python/Windows. Muestra el estado de ejecución de cada tarea (completada, con error, detenida o pendiente), el progreso de sub-procesos, los logs de ejecución y los tracebacks de errores — todo desde un único HTML generado automáticamente al final de cada ciclo de procesamiento.</p>
+
+    <div class="feature-list">
+      <span class="feature" data-es="Marcador de estado por tarea (ok / error / detenida / pendiente)" data-en="Per-task status indicator (ok / error / stopped / pending)">Marcador de estado por tarea (ok / error / detenida / pendiente)</span>
+      <span class="feature" data-es="Progreso de sub-tareas secuenciales" data-en="Sequential subtask progress">Progreso de sub-tareas secuenciales</span>
+      <span class="feature" data-es="Log de ejecución expandible por tarea" data-en="Expandable execution log per task">Log de ejecución expandible por tarea</span>
+      <span class="feature" data-es="Traceback de errores con resaltado" data-en="Error traceback with color highlighting">Traceback de errores con resaltado</span>
+      <span class="feature" data-es="Scoreboard global de ejecución" data-en="Global execution scoreboard">Scoreboard global de ejecución</span>
+      <span class="feature" data-es="Generación automática desde Python" data-en="Automatic generation from Python">Generación automática desde Python</span>
+    </div>
+
+    <button class="demo-btn" id="btn01" onclick="toggleDemo('demo01','btn01')">
+      <span data-es="Ver demo interactiva" data-en="View interactive demo">Ver demo interactiva</span>
+      <span class="arr">↓</span>
+    </button>
+
+    <div class="demo-panel" id="demo01">
+      <div class="demo-label">
+        <span>demo · task-monitor</span>
+        <span data-es="Interactivo — haz clic en cada tarea para expandir" data-en="Interactive — click each task to expand">Interactivo — haz clic en cada tarea para expandir</span>
+      </div>
+      <div class="demo-iframe-wrap">
+        <iframe
+          id="iframe01"
+          title="Task Monitor demo"
+          loading="lazy"
+          sandbox="allow-scripts allow-same-origin">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLOT para próximos proyectos               -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Para agregar un nuevo proyecto copia el bloque .proj-card de arriba,
+       cambia el número, título, descripción, features y el id del demo.
+       Crea el iframe apuntando al archivo correspondiente. -->
+
+</div><!-- end project-section -->
+
+<footer>
+  <span data-es="© 2025 Yeferson Andres Velazco · Estadístico · Universidad Nacional de Colombia" data-en="© 2025 Yeferson Andres Velazco · Statistician · Universidad Nacional de Colombia">© 2025 Yeferson Andres Velazco · Estadístico · Universidad Nacional de Colombia</span>
+</footer>
+
+<script>
+/* ── Language toggle ── */
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const v = el.getAttribute('data-' + lang);
+    if (v !== null) el.innerHTML = v;
+  });
+  document.documentElement.lang = lang;
+}
+
+/* ── Task Monitor HTML — inlined so it works without a server ── */
+const TASK_MONITOR_HTML = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f7f5;--surface:#ffffff;--border:#e4e4e0;--text:#1a1a18;--muted:#8a8a84;--faint:#c8c8c4;--ok:#1a7a4a;--ok-bg:#edf7f1;--err:#b53a2a;--err-bg:#fdf1ef;--warn:#8a5c00;--warn-bg:#fdf8ed;--pend:#1a4a8a;--pend-bg:#eef3fc;--mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;--radius:4px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.5;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:40px 24px 60px}
+header{margin-bottom:36px}
+.header-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px}
+h1{font-family:var(--mono);font-size:18px;font-weight:500;letter-spacing:-.3px;color:var(--text)}
+.header-meta{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.3px}
+.header-sub{font-size:13px;color:var(--muted);font-weight:300;margin-top:2px}
+.scores{display:flex;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px;background:var(--surface)}
+.score{flex:1;padding:14px 18px;border-right:1px solid var(--border);position:relative}
+.score:last-child{border-right:none}
+.score-n{font-family:var(--mono);font-size:24px;font-weight:500;line-height:1;margin-bottom:4px}
+.score.ok .score-n{color:var(--ok)}.score.err .score-n{color:var(--err)}.score.warn .score-n{color:var(--warn)}.score.pend .score-n{color:var(--pend)}
+.score-l{font-size:11px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
+.score::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.score.ok::before{background:var(--ok)}.score.err::before{background:var(--err)}.score.warn::before{background:var(--warn)}.score.pend::before{background:var(--pend)}
+.section-label{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin-bottom:10px;margin-top:32px}
+.task-list{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.task-row{border-bottom:1px solid var(--border)}
+.task-row:last-child{border-bottom:none}
+.task-head{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:16px;padding:12px 16px;cursor:pointer;transition:background .12s}
+.task-head:hover{background:var(--bg)}
+.task-name{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:10px}
+.task-name .arrow{color:var(--faint);font-size:9px;transition:transform .2s;flex-shrink:0}
+.task-row.open .task-name .arrow{transform:rotate(90deg);color:var(--muted)}
+.task-desc{font-size:12px;color:var(--muted);margin-top:2px;padding-left:19px;font-weight:300}
+.task-sched{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.tag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:3px;border:1px solid var(--border);color:var(--muted);white-space:nowrap}
+.chip{font-family:var(--mono);font-size:11px;font-weight:500;padding:3px 9px;border-radius:3px;white-space:nowrap;letter-spacing:.2px}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}.chip.err{background:var(--err-bg);color:var(--err)}.chip.warn{background:var(--warn-bg);color:var(--warn)}.chip.pend{background:var(--pend-bg);color:var(--pend)}.chip.noinit{background:var(--err-bg);color:var(--err)}.chip.stop{background:var(--warn-bg);color:var(--warn)}
+.prog{display:flex;align-items:center;gap:8px}
+.prog-bar{width:60px;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;transition:width .3s}
+.prog-fill.ok{background:var(--ok)}.prog-fill.err{background:var(--err)}.prog-fill.warn{background:var(--warn)}.prog-fill.pend{background:var(--pend)}.prog-fill.noinit{background:var(--faint)}
+.prog-txt{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.task-body{display:none;padding:14px 16px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.task-row.open .task-body{display:block}
+.subtask-list{display:flex;flex-direction:column;gap:6px}
+.sub-item{display:flex;align-items:center;gap:10px}
+.sub-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.sub-dot.ok{background:var(--ok)}.sub-dot.err{background:var(--err)}.sub-dot.noinit{background:var(--faint)}
+.sub-name{font-family:var(--mono);font-size:12px;color:var(--text)}
+.sub-code{font-family:var(--mono);font-size:11px;color:var(--err);margin-left:6px}
+.exec-list{display:flex;flex-direction:column;gap:10px}
+.exec-item{padding:10px 12px;border-radius:var(--radius);border-left:3px solid var(--border)}
+.exec-item.ok{border-left-color:var(--ok)}.exec-item.err{border-left-color:var(--err)}.exec-item.warn{border-left-color:var(--warn)}.exec-item.pend{border-left-color:var(--pend)}.exec-item.stop{border-left-color:var(--warn)}
+.exec-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.exec-time{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.exec-dur{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.tog{font-family:var(--mono);font-size:11px;color:var(--pend);cursor:pointer;text-decoration:underline;margin-right:10px}
+.tog.tb-tog{color:var(--err)}
+.code-block{display:none;margin-top:8px;padding:10px 12px;background:var(--text);border-radius:var(--radius);font-family:var(--mono);font-size:11px;color:#c8c8c0;white-space:pre;overflow-x:auto;line-height:1.6}
+.c-ok{color:#6dbf8c}.c-err{color:#f07070}.c-warn{color:#e0a040}.c-dim{color:#555550}.c-blue{color:#7ab0e0}
+footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+footer p{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.task-list{animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+@media(max-width:600px){.task-head{grid-template-columns:1fr auto}.task-sched{display:none}.scores{flex-wrap:wrap}.score{min-width:50%;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="header-top"><h1>task-monitor</h1><span class="header-meta" id="ts">—</span></div>
+  <p class="header-sub">Sistema de seguimiento de tareas programadas automatizadas</p>
+</header>
+<div class="scores">
+  <div class="score ok"><div class="score-n" id="s-ok">—</div><div class="score-l">Completadas</div></div>
+  <div class="score err"><div class="score-n" id="s-err">—</div><div class="score-l">Con errores</div></div>
+  <div class="score warn"><div class="score-n" id="s-stop">—</div><div class="score-l">Detenidas</div></div>
+  <div class="score pend"><div class="score-n" id="s-pend">—</div><div class="score-l">Pendientes</div></div>
+</div>
+<div class="section-label">Tareas secuenciales</div>
+<div class="task-list" id="list-seq"></div>
+<div class="section-label">Tareas programadas</div>
+<div class="task-list" id="list-sch"></div>
+<footer><p>Generado automáticamente · martes, 17 de marzo de 2026</p><p>env: python · scheduler: cron</p></footer>
+</div>
+<script>
+const SEQ=[{nombre:"pipeline_ingesta",desc:"Descarga y validación de fuentes de datos externas",estado:"ok",n_ok:3,n_total:3,subs:[{n:"fetch_source_a",s:"ok",v:0},{n:"fetch_source_b",s:"ok",v:0},{n:"validate_schema",s:"ok",v:0}]},{nombre:"pipeline_procesamiento",desc:"Transformación, modelado y generación de pronósticos",estado:"error",n_ok:7,n_total:9,subs:[{n:"normalize_data",s:"ok",v:0},{n:"join_datasets",s:"ok",v:0},{n:"run_model_a",s:"ok",v:0},{n:"run_model_b",s:"ok",v:0},{n:"run_model_c",s:"ok",v:0},{n:"compute_metrics",s:"ok",v:0},{n:"export_results",s:"ok",v:0},{n:"build_report",s:"error",v:2},{n:"send_artifacts",s:"error",v:1}]},{nombre:"pipeline_reportes",desc:"Generación de gráficas, reportes y resúmenes ejecutivos",estado:"ok",n_ok:6,n_total:6,subs:[{n:"fig_overview",s:"ok",v:0},{n:"fig_detail_a",s:"ok",v:0},{n:"fig_detail_b",s:"ok",v:0},{n:"compile_report",s:"ok",v:0},{n:"export_pdf",s:"ok",v:0},{n:"summary_index",s:"ok",v:0}]},{nombre:"pipeline_publicacion",desc:"Copia de resultados a servidores y actualización de plataformas",estado:"no_iniciada",n_ok:0,n_total:4,subs:[{n:"copy_to_server",s:"no_iniciada",v:-1},{n:"update_api",s:"no_iniciada",v:-1},{n:"refresh_dashboard",s:"no_iniciada",v:-1},{n:"notify_users",s:"no_iniciada",v:-1}]}];
+const SCH=[{nombre:"task_sync_external",desc:"Sincroniza datos desde APIs externas",period:"DIARIO",horas:["04:00"],estado:"ok",execs:[{ini:"04:00:03",fin:"04:04:18",estado:"ok",dur:"4m 15s",cod:null,log:["[2026-03-17 04:00:03] 🚀 INICIO de tarea: task_sync_external","[2026-03-17 04:00:33] ⏸️  Ejecución duplicada evitada (última hace 30s)","[2026-03-17 04:04:18] ✅ FIN exitoso de tarea: task_sync_external (código: 0)"],tb:""}]},{nombre:"task_run_models",desc:"Ejecuta modelos de predicción y cálculo de métricas",period:"DIARIO",horas:["04:30","14:30"],estado:"ok",execs:[{ini:"04:30:11",fin:"04:52:44",estado:"ok",dur:"22m 33s",cod:null,log:["[2026-03-17 04:30:11] 🚀 INICIO de tarea: task_run_models","[2026-03-17 04:30:41] ⏸️  Ejecución duplicada evitada (última hace 30s)","[2026-03-17 04:52:44] ✅ FIN exitoso de tarea: task_run_models (código: 0)"],tb:""},{ini:"14:30",fin:null,estado:"pendiente",dur:null,cod:null,log:[],tb:""}]},{nombre:"task_copy_outputs",desc:"Copia archivos de salida al servidor de resultados",period:"DIARIO",horas:["05:00","05:30"],estado:"error",execs:[{ini:"05:00:07",fin:"05:00:11",estado:"error",dur:"0m 4s",cod:3,log:["[2026-03-17 05:00:07] 🚀 INICIO de tarea: task_copy_outputs","[2026-03-17 05:00:11] ❌ FIN con error de tarea: task_copy_outputs (código: 3)"],tb:"Traceback (most recent call last):\\n  File \\"scripts/task_copy_outputs.py\\", line 58, in <module>\\n    shutil.copy2(src_path, dst_path)\\nFileNotFoundError: [Errno 2] No such file or directory:\\n  '/mnt/results/outputs/run_2026031700/forecast.csv'"},{ini:"05:30:02",fin:"05:30:06",estado:"error",dur:"0m 4s",cod:3,log:["[2026-03-17 05:30:02] 🚀 INICIO de tarea: task_copy_outputs","[2026-03-17 05:30:06] ❌ FIN con error de tarea: task_copy_outputs (código: 3)"],tb:"Traceback (most recent call last):\\n  File \\"scripts/task_copy_outputs.py\\", line 58, in <module>\\n    shutil.copy2(src_path, dst_path)\\nFileNotFoundError: [Errno 2] No such file or directory:\\n  '/mnt/results/outputs/run_2026031700/forecast.csv'"}]},{nombre:"task_send_report",desc:"Genera y envía el informe diario por correo",period:"DIARIO",horas:["06:10"],estado:"ok",execs:[{ini:"06:10:02",fin:"06:11:19",estado:"ok",dur:"1m 17s",cod:null,log:["[2026-03-17 06:10:02] 🚀 INICIO de tarea: task_send_report","[2026-03-17 06:10:32] ⏸️  Ejecución duplicada evitada (última hace 30s)","[2026-03-17 06:11:19] ✅ FIN exitoso de tarea: task_send_report (código: 0)"],tb:""}]},{nombre:"task_weekly_validation",desc:"Validación de desempeño de modelos (ejecución semanal)",period:"SEMANAL · Lun / Mié",horas:["06:00"],estado:"ok",execs:[{ini:"06:00:08",fin:"06:38:52",estado:"ok",dur:"38m 44s",cod:null,log:["[2026-03-16 06:00:08] 🚀 INICIO de tarea: task_weekly_validation","[2026-03-16 06:00:38] ⏸️  Ejecución duplicada evitada (última hace 30s)","[2026-03-16 06:38:52] ✅ FIN exitoso de tarea: task_weekly_validation (código: 0)"],tb:""}]},{nombre:"task_update_dashboard",desc:"Actualiza métricas e indicadores del panel de monitoreo",period:"DIARIO",horas:["07:00","13:00"],estado:"detenida",execs:[{ini:"07:00:14",fin:"07:05:33",estado:"detenida",dur:"5m 19s",cod:null,log:["[2026-03-17 07:00:14] 🚀 INICIO de tarea: task_update_dashboard","[2026-03-17 07:00:44] ⏸️  Ejecución duplicada evitada (última hace 30s)","[2026-03-17 07:05:33]    🛑 Deteniendo task_update_dashboard (PID: 9214)"],tb:""},{ini:"13:00",fin:null,estado:"pendiente",dur:null,cod:null,log:[],tb:""}]},{nombre:"task_alerts",desc:"Evalúa umbrales y despacha alertas automáticas",period:"DIARIO",horas:["09:20","19:20"],estado:"ok",execs:[{ini:"09:20:17",fin:"09:28:00",estado:"ok",dur:"7m 43s",cod:null,log:["[2026-03-17 09:20:17] 🚀 INICIO de tarea: task_alerts","[2026-03-17 09:20:47] ⏸️  Ejecución duplicada evitada (última hace 30s)","[2026-03-17 09:28:00] ✅ FIN exitoso de tarea: task_alerts (código: 0)"],tb:""},{ini:"19:20",fin:null,estado:"pendiente",dur:null,cod:null,log:[],tb:""}]},{nombre:"task_monthly_enso",desc:"Modelos de largo plazo: temperatura y anomalías climáticas",period:"MENSUAL · días 7–10",horas:["07:00"],estado:"ok",execs:[{ini:"07:00:02",fin:"07:51:38",estado:"ok",dur:"51m 36s",cod:null,log:["[2026-03-07 07:00:02] 🚀 INICIO de tarea: task_monthly_enso","[2026-03-07 07:00:32] ⏸️  Ejecución duplicada evitada (última hace 30s)","[2026-03-07 07:51:38] ✅ FIN exitoso de tarea: task_monthly_enso (código: 0)"],tb:""}]}];
+const CHIPS={ok:['ok','✓ ok'],error:['err','✕ error'],no_iniciada:['noinit','— no iniciada'],pendiente:['pend','◌ pendiente'],detenida:['stop','■ detenida']};
+function chip(s){const[cls,lbl]=CHIPS[s]||['pend',s];return \`<span class="chip \${cls}">\${lbl}</span>\`;}
+function progBar(n,t,s){const pct=t>0?Math.round(n/t*100):0;const cls=CHIPS[s]?.[0]||'pend';return \`<div class="prog"><div class="prog-bar"><div class="prog-fill \${cls}" style="width:\${pct}%"></div></div><span class="prog-txt">\${n}/\${t}</span></div>\`;}
+function colorLog(l){if(l.includes('✅')||l.includes('FIN exitoso'))return\`<span class="c-ok">\${l}</span>\`;if(l.includes('❌')||l.includes('FIN con error'))return\`<span class="c-err">\${l}</span>\`;if(l.includes('🛑'))return\`<span class="c-warn">\${l}</span>\`;if(l.includes('⏸️'))return\`<span class="c-dim">\${l}</span>\`;if(l.includes('🚀'))return\`<span class="c-blue">\${l}</span>\`;return l;}
+let _id=0;const uid=()=>'u'+(++_id);
+function toggleRow(id){document.getElementById('row-'+id).classList.toggle('open');}
+function toggleEl(id){const el=document.getElementById(id);if(el)el.style.display=el.style.display==='block'?'none':'block';}
+function renderSeq(){const el=document.getElementById('list-seq');SEQ.forEach(t=>{const id=uid();const subsHtml=t.subs.map(s=>{const dot=s.s==='ok'?'ok':s.s==='no_iniciada'?'noinit':'err';const code=(s.s!=='ok'&&s.v!==0&&s.v!==-1)?\`<span class="sub-code">cód \${s.v}</span>\`:'';return\`<div class="sub-item"><div class="sub-dot \${dot}"></div><span class="sub-name">\${s.n}</span>\${code}</div>\`;}).join('');el.innerHTML+=\`<div class="task-row" id="row-\${id}"><div class="task-head" onclick="toggleRow('\${id}')"><div class="task-name-wrap"><div class="task-name"><span class="arrow">▶</span>\${t.nombre}</div><div class="task-desc">\${t.desc}</div></div><div class="task-sched">\${progBar(t.n_ok,t.n_total,t.estado)}</div>\${chip(t.estado)}</div><div class="task-body"><div class="subtask-list">\${subsHtml}</div></div></div>\`;});}
+function renderSch(){const el=document.getElementById('list-sch');SCH.forEach(t=>{const id=uid();const n_ok=t.execs.filter(e=>e.estado==='ok').length;const n_tot=t.horas.length;const tags=t.horas.map(h=>\`<span class="tag">\${h}</span>\`).join('');const ptag=\`<span class="tag">\${t.period}</span>\`;const execsHtml=t.execs.map(e=>{const cls=CHIPS[e.estado]?.[0]||'pend';const lid=uid();const tbid=uid();const timeStr=e.fin?\`\${e.ini} → \${e.fin}\`:\`\${e.ini} → …\`;let logBtn='',logBlock='';if(e.log&&e.log.length){const lines=e.log.map(colorLog).join('\\n');logBtn=\`<span class="tog" onclick="toggleEl('\${lid}')">ver log</span>\`;logBlock=\`<div class="code-block" id="\${lid}">\${lines}</div>\`;}let tbBtn='',tbBlock='';if(e.estado==='error'&&e.tb){const tbEsc=e.tb.replace(/</g,'&lt;').replace(/>/g,'&gt;');tbBtn=\`<span class="tog tb-tog" onclick="toggleEl('\${tbid}')">ver traceback</span>\`;tbBlock=\`<div class="code-block" id="\${tbid}" style="color:#f07070">\${tbEsc}</div>\`;}return\`<div class="exec-item \${cls}"><div class="exec-top"><span class="exec-time">\${timeStr}</span>\${e.dur?\`<span class="exec-dur">\${e.dur}</span>\`:''}\${chip(e.estado)}\${e.cod!==null?\`<span style="font-family:var(--mono);font-size:10px;color:var(--err)">cód \${e.cod}</span>\`:''}</div>\${logBtn}\${tbBtn}\${logBlock}\${tbBlock}</div>\`;}).join('');el.innerHTML+=\`<div class="task-row" id="row-\${id}"><div class="task-head" onclick="toggleRow('\${id}')"><div class="task-name-wrap"><div class="task-name"><span class="arrow">▶</span>\${t.nombre}</div><div class="task-desc">\${t.desc}</div></div><div class="task-sched">\${tags}\${ptag}\${progBar(n_ok,n_tot,t.estado)}</div>\${chip(t.estado)}</div><div class="task-body"><div class="exec-list">\${execsHtml}</div></div></div>\`;});}
+function calcScores(){const all=[...SEQ.map(t=>t.estado),...SCH.map(t=>t.estado)];document.getElementById('s-ok').textContent=all.filter(s=>s==='ok').length;document.getElementById('s-err').textContent=all.filter(s=>s==='error').length;document.getElementById('s-stop').textContent=all.filter(s=>s==='detenida').length;document.getElementById('s-pend').textContent=all.filter(s=>s==='pendiente'||s==='no_iniciada').length;}
+function updateTs(){const now=new Date();document.getElementById('ts').textContent=now.toISOString().slice(0,10)+' · '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');}
+renderSeq();renderSch();calcScores();updateTs();setInterval(updateTs,30000);
+<\/script>
+</body>
+</html>`;
+
+/* ── Demo toggle & iframe injection ── */
+function toggleDemo(panelId, btnId) {
+  const panel = document.getElementById(panelId);
+  const btn   = document.getElementById(btnId);
+  const isOpen = panel.classList.contains('open');
+
+  panel.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+
+  const labelSpan = btn.querySelector('span:first-child');
+  const isEs = document.documentElement.lang !== 'en';
+
+  if (!isOpen) {
+    labelSpan.textContent = isEs ? 'Ocultar demo' : 'Hide demo';
+    // Inject iframe content only once
+    const iframe = panel.querySelector('iframe');
+    if (!iframe.srcdoc) {
+      if (panelId === 'demo01') {
+        iframe.srcdoc = TASK_MONITOR_HTML;
+      }
+    }
+  } else {
+    labelSpan.textContent = isEs ? 'Ver demo interactiva' : 'View interactive demo';
+  }
+}
+</script>
+</body>
+</html>
