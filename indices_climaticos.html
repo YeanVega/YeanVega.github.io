@@ -235,18 +235,6 @@ footer a{color:#58a6ff;text-decoration:none}
   </details>
   <div class="chart-card">
     <div class="chart-hdr">
-      <p class="sec" style="margin:0">Probabilidades ENSO &mdash; IRI/Columbia (<span id="iri-issue-label"></span>)</p>
-      <div class="legend-row">
-        <div class="leg-item"><div class="leg-line" style="background:#6ab4ff"></div>La Nina</div>
-        <div class="leg-item"><div class="leg-line" style="background:#8b949e"></div>Neutral</div>
-        <div class="leg-item"><div class="leg-line" style="background:#ff8c5a"></div>El Nino</div>
-      </div>
-    </div>
-    <p class="desc" style="margin-bottom:10px">Pronostico del IRI/Columbia basado en el promedio de 20+ modelos dinamicos y estadisticos. Anomalias referidas a OISSTv2, que puede diferir hasta 0.5 C respecto a ERSSTv5.</p>
-    <div class="chart-box" style="height:240px"><canvas id="probIriChart"></canvas></div>
-  </div>
-  <div class="chart-card">
-    <div class="chart-hdr">
       <p class="sec" style="margin:0">Plumas IRI/Columbia &mdash; anomalia Nino 3.4</p>
       <div class="legend-row">
         <div class="leg-item"><div class="leg-line" style="background:#94a3b8"></div>Observado</div>
@@ -258,6 +246,18 @@ footer a{color:#58a6ff;text-decoration:none}
     </div>
     <p class="desc" style="margin-bottom:10px">Anomalias pronosticadas por temporada estacional. Se muestran los promedios del conjunto dinamico, estadistico y total, mas el modelo CS-IRI-MM. Las observaciones reales anclan el grafico en los 3 meses previos.</p>
     <div class="chart-box" style="height:260px"><canvas id="iriPlumeChart"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-hdr">
+      <p class="sec" style="margin:0">Probabilidades ENSO &mdash; IRI/Columbia (<span id="iri-issue-label"></span>)</p>
+      <div class="legend-row">
+        <div class="leg-item"><div class="leg-line" style="background:#6ab4ff"></div>La Nina</div>
+        <div class="leg-item"><div class="leg-line" style="background:#8b949e"></div>Neutral</div>
+        <div class="leg-item"><div class="leg-line" style="background:#ff8c5a"></div>El Nino</div>
+      </div>
+    </div>
+    <p class="desc" style="margin-bottom:10px">Pronostico del IRI/Columbia basado en el promedio de 20+ modelos dinamicos y estadisticos. Anomalias referidas a OISSTv2, que puede diferir hasta 0.5 C respecto a ERSSTv5.</p>
+    <div class="chart-box" style="height:240px"><canvas id="probIriChart"></canvas></div>
   </div>
   <details class="chart-card" style="margin-bottom:24px">
     <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">
