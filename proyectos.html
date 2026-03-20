@@ -157,6 +157,7 @@ footer { text-align: center; padding: 2.5rem; font-size: 0.78rem; color: var(--i
       <span class="feature" data-es="Temperatura superficial del océano y anomalías" data-en="Sea surface temperature and anomalies">Temperatura superficial del océano y anomalías</span>
       <span class="feature" data-es="Identificación automática de fases (El Niño / La Niña / Neutro)" data-en="Automatic phase identification (El Niño / La Niña / Neutral)">Identificación automática de fases (El Niño / La Niña / Neutro)</span>
       <span class="feature" data-es="Gráficos interactivos con zoom y tooltips" data-en="Interactive charts with zoom and tooltips">Gráficos interactivos con zoom y tooltips</span>
+      <span class="feature" data-es="Sin dependencias de servidor — HTML autocontenido" data-en="No server dependencies — self-contained HTML">Sin dependencias de servidor — HTML autocontenido</span>
     </div>
 
     <a class="demo-btn" href="indices_climaticos.html" target="_blank" rel="noopener">
@@ -166,11 +167,45 @@ footer { text-align: center; padding: 2.5rem; font-size: 0.78rem; color: var(--i
   </div>
 
   <!-- ═══════════════════════════════════════════ -->
-  <!-- PROYECTO 02 — Task Monitor                 -->
+  <!-- PROYECTO 02 — Pronósticos NOAA / IRI       -->
   <!-- ═══════════════════════════════════════════ -->
   <div class="proj-card">
     <div class="proj-top">
       <div class="proj-num">02</div>
+      <div>
+        <div class="proj-meta">
+          <span class="proj-badge">2025–2026</span>
+          <span class="proj-badge tech">Python</span>
+          <span class="proj-badge tech">NumPy · pandas</span>
+          <span class="proj-badge tech" data-es="Climatología" data-en="Climatology">Climatología</span>
+        </div>
+        <h2 class="proj-title" data-es="Procesamiento de pronósticos de temperatura NOAA y análisis IRI" data-en="NOAA temperature forecast processing and IRI data analysis">Procesamiento de pronósticos de temperatura NOAA y análisis IRI</h2>
+        <p class="proj-sub" data-es="Descarga, cálculo de anomalías e integración de fuentes climáticas internacionales" data-en="Download, anomaly calculation and integration of international climate sources">Descarga, cálculo de anomalías e integración de fuentes climáticas internacionales</p>
+      </div>
+    </div>
+
+    <p class="proj-desc" data-es="Pipeline de procesamiento automático que consume los pronósticos de temperatura superficial publicados por la NOAA (National Oceanic and Atmospheric Administration), calcula las anomalías respecto a la climatología de referencia y los integra con la información de probabilidades estacionales del IRI (International Research Institute for Climate and Society). El resultado alimenta directamente los modelos de pronóstico hidroclimático, proporcionando señales de largo plazo sobre la evolución esperada de la temperatura y sus desviaciones respecto al comportamiento histórico." data-en="Automated processing pipeline that consumes surface temperature forecasts published by NOAA (National Oceanic and Atmospheric Administration), calculates anomalies against the reference climatology, and integrates them with seasonal probability information from IRI (International Research Institute for Climate and Society). The output directly feeds hydroclimatic forecast models, providing long-term signals on the expected temperature evolution and its deviations from historical behavior.">Pipeline de procesamiento automático que consume los pronósticos de temperatura superficial publicados por la NOAA (National Oceanic and Atmospheric Administration), calcula las anomalías respecto a la climatología de referencia y los integra con la información de probabilidades estacionales del IRI (International Research Institute for Climate and Society). El resultado alimenta directamente los modelos de pronóstico hidroclimático, proporcionando señales de largo plazo sobre la evolución esperada de la temperatura y sus desviaciones respecto al comportamiento histórico.</p>
+
+    <div class="feature-list">
+      <span class="feature" data-es="Descarga automatizada de pronósticos NOAA (CPC · NCEP)" data-en="Automated download of NOAA forecasts (CPC · NCEP)">Descarga automatizada de pronósticos NOAA (CPC · NCEP)</span>
+      <span class="feature" data-es="Cálculo de anomalías respecto a climatología de referencia" data-en="Anomaly calculation against reference climatology">Cálculo de anomalías respecto a climatología de referencia</span>
+      <span class="feature" data-es="Integración con probabilidades estacionales del IRI" data-en="Integration with IRI seasonal probability data">Integración con probabilidades estacionales del IRI</span>
+      <span class="feature" data-es="Procesamiento de cuadrículas espaciales (grids)" data-en="Spatial grid processing">Procesamiento de cuadrículas espaciales (grids)</span>
+      <span class="feature" data-es="Salida estructurada para modelos hidroclimáticos" data-en="Structured output for hydroclimatic models">Salida estructurada para modelos hidroclimáticos</span>
+    </div>
+
+    <a class="demo-btn" href="indices_climaticos.html" target="_blank" rel="noopener">
+      <span data-es="Abrir demo en nueva pestaña" data-en="Open demo in new tab">Abrir demo en nueva pestaña</span>
+      <span>↗</span>
+    </a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PROYECTO 03 — Task Monitor                 -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="proj-card">
+    <div class="proj-top">
+      <div class="proj-num">03</div>
       <div>
         <div class="proj-meta">
           <span class="proj-badge">2025–2026</span>
@@ -194,19 +229,19 @@ footer { text-align: center; padding: 2.5rem; font-size: 0.78rem; color: var(--i
       <span class="feature" data-es="Generación automática desde Python" data-en="Automatic generation from Python">Generación automática desde Python</span>
     </div>
 
-    <button class="demo-btn" id="btn02" onclick="toggleDemo('demo02','btn02')">
+    <button class="demo-btn" id="btn03" onclick="toggleDemo('demo03','btn03')">
       <span data-es="Ver demo interactiva" data-en="View interactive demo">Ver demo interactiva</span>
       <span class="arr">↓</span>
     </button>
 
-    <div class="demo-panel" id="demo02">
+    <div class="demo-panel" id="demo03">
       <div class="demo-label">
         <span>demo · task-monitor</span>
         <span data-es="Interactivo — haz clic en cada tarea para expandir" data-en="Interactive — click each task to expand">Interactivo — haz clic en cada tarea para expandir</span>
       </div>
       <div class="demo-iframe-wrap">
         <iframe
-          id="iframe02"
+          id="iframe03"
           title="Task Monitor demo"
           loading="lazy"
           sandbox="allow-scripts allow-same-origin">
@@ -365,7 +400,7 @@ function toggleDemo(panelId, btnId) {
     // Inject iframe content only once
     const iframe = panel.querySelector('iframe');
     if (!iframe.srcdoc) {
-      if (panelId === 'demo02') {
+      if (panelId === 'demo03') {
         iframe.srcdoc = TASK_MONITOR_HTML;
       }
     }
