@@ -73,7 +73,7 @@ footer a{color:#58a6ff;text-decoration:none}
 <div class="container">
 <header>
   <h1>🌊 Monitor ENSO — ONI · RONI · Temperatura</h1>
-  <p>Indices del Nino Oscilacion Sur &middot; NOAA/CPC</p>
+  <p>Indices del Niño Oscilacion Sur &middot; NOAA/CPC</p>
 </header>
 <div id="info-bar"><span id="info-txt">Cargando...</span><span id="info-date"></span></div>
 <div class="tab-bar">
@@ -85,7 +85,7 @@ footer a{color:#58a6ff;text-decoration:none}
 <!-- TAB INDICES -->
 <div class="tab-panel active" id="tab-indices">
   <p class="sec">Estado actual</p>
-  <p class="desc">El <b>ONI</b> (Oceanic Nino Index) mide la anomalia de temperatura del mar en la region Nino 3.4 como promedio de 3 meses consecutivos. El <b>RONI</b> (Relative ONI) compara esa anomalia respecto al resto del tropico, corrigiendo el calentamiento de fondo. Ambos calculados por NOAA/CPC con base climatologica 1991-2020.</p>
+  <p class="desc">El <b>ONI</b> (Oceanic Niño Index) mide la anomalia de temperatura del mar en la region Niño 3.4 como promedio de 3 meses consecutivos. El <b>RONI</b> (Relative ONI) compara esa anomalia respecto al resto del tropico, corrigiendo el calentamiento de fondo. Ambos calculados por NOAA/CPC con base climatologica 1991-2020.</p>
   <div class="cards" id="estado-cards"></div>
   <p class="sec">Ultimos 6 periodos estacionales</p>
   <div class="tbl-wrap"><table>
@@ -100,38 +100,38 @@ footer a{color:#58a6ff;text-decoration:none}
         <div class="leg-item"><div class="leg-line" style="background:var(--roni)"></div>RONI</div>
       </div>
     </div>
-    <p class="desc" style="margin-bottom:10px">Serie historica completa de ambos indices. Los colores de fondo indican periodos El Nino (rojo) y La Nina (azul) segun el umbral de 0.5 C.</p>
+    <p class="desc" style="margin-bottom:10px">Serie historica completa de ambos indices. Los colores de fondo indican periodos El Niño (rojo) y La Niña (azul) segun el umbral de 0.5 C.</p>
     <div class="range-row" id="range-idx">
       <button class="rbtn activate" onclick="setRangeIdx(6)">6 Meses</button>
-      <button class="rbtn" onclick="setRangeIdx(12)">1 ano</button>
-      <button class="rbtn" onclick="setRangeIdx(24)">2 anos</button>
-      <button class="rbtn" onclick="setRangeIdx(60)">5 anos</button>
-      <button class="rbtn" onclick="setRangeIdx(120)">10 anos</button>
+      <button class="rbtn" onclick="setRangeIdx(12)">1 año</button>
+      <button class="rbtn" onclick="setRangeIdx(24)">2 años</button>
+      <button class="rbtn" onclick="setRangeIdx(60)">5 años</button>
+      <button class="rbtn" onclick="setRangeIdx(120)">10 años</button>
       <button class="rbtn" onclick="setRangeIdx(0)">Todo</button>
     </div>
     <div class="chart-box"><canvas id="idxChart"></canvas></div>
   </div>
   <p class="sec">Umbrales de clasificacion</p>
   <div class="ref-grid">
-    <div class="ref-card"><div class="rt" style="color:#ff8c5a">El Nino</div><div class="rr">ONI &ge; +0.5 C<br>por 5+ periodos consecutivos</div></div>
+    <div class="ref-card"><div class="rt" style="color:#ff8c5a">El Niño</div><div class="rr">ONI &ge; +0.5 C<br>por 5+ periodos consecutivos</div></div>
     <div class="ref-card"><div class="rt" style="color:#8b949e">Neutral</div><div class="rr">-0.5 C &lt; anomalia &lt; +0.5 C</div></div>
-    <div class="ref-card"><div class="rt" style="color:#6ab4ff">La Nina</div><div class="rr">ONI &le; -0.5 C<br>por 5+ periodos consecutivos</div></div>
+    <div class="ref-card"><div class="rt" style="color:#6ab4ff">La Niña</div><div class="rr">ONI &le; -0.5 C<br>por 5+ periodos consecutivos</div></div>
   </div>
 </div>
 
 <!-- TAB TEMPERATURA -->
 <div class="tab-panel" id="tab-temp">
-  <p class="sec">Estado actual &mdash; Nino 3.4</p>
-  <p class="desc">Temperatura superficial del mar (SST) mensual en la region Nino 3.4 (5N-5S, 120-170W) del conjunto <b>ERSSTv5</b> de NOAA. La anomalia resulta de restar la climatologia mensual 1991-2020.</p>
+  <p class="sec">Estado actual &mdash; Niño 3.4</p>
+  <p class="desc">Temperatura superficial del mar (SST) mensual en la region Niño 3.4 (5N-5S, 120-170W) del conjunto <b>ERSSTv5</b> de NOAA. La anomalia resulta de restar la climatologia mensual 1991-2020.</p>
   <div class="cards" id="temp-cards"></div>
-  <p class="sec">Ultimos 12 meses &mdash; Temperatura &amp; Anomalia Nino 3.4</p>
+  <p class="sec">Ultimos 12 meses &mdash; Temperatura &amp; Anomalia Niño 3.4</p>
   <div class="tbl-wrap"><table>
-    <thead><tr><th>Ano</th><th>Mes</th><th>Temp (C)</th><th>Anomalia (C)</th><th>Condicion</th></tr></thead>
+    <thead><tr><th>Año</th><th>Mes</th><th>Temp (C)</th><th>Anomalia (C)</th><th>Condicion</th></tr></thead>
     <tbody id="temp-table"></tbody>
   </table></div>
   <div class="chart-card">
     <div class="chart-hdr">
-      <p class="sec" style="margin:0">Temperatura &amp; Anomalia &mdash; Nino 3.4</p>
+      <p class="sec" style="margin:0">Temperatura &amp; Anomalia &mdash; Niño 3.4</p>
       <div class="legend-row">
         <div class="leg-item"><div class="leg-line" style="background:var(--temp34)"></div>Temperatura</div>
         <div class="leg-item"><div class="leg-dash" style="border-color:var(--anom34)"></div>Anomalia</div>
@@ -143,17 +143,18 @@ footer a{color:#58a6ff;text-decoration:none}
       <button class="tog-btn active" id="tog-anom" onclick="toggleSeries('anom')"><span class="tog-dot" style="background:var(--anom34)"></span>Anomalia</button>
     </div>
     <div class="range-row" id="range-temp">
-      <button class="rbtn" onclick="setRangeTemp(12)">1 ano</button>
-      <button class="rbtn active" onclick="setRangeTemp(24)">2 anos</button>
-      <button class="rbtn" onclick="setRangeTemp(60)">5 anos</button>
-      <button class="rbtn" onclick="setRangeTemp(120)">10 anos</button>
+      <button class="rbtn active" onclick="setRangeTemp(6)">6 meses</button>
+      <button class="rbtn" onclick="setRangeTemp(12)">1 año</button>
+      <button class="rbtn" onclick="setRangeTemp(24)">2 años</button>
+      <button class="rbtn" onclick="setRangeTemp(60)">5 años</button>
+      <button class="rbtn" onclick="setRangeTemp(120)">10 años</button>
       <button class="rbtn" onclick="setRangeTemp(0)">Todo</button>
     </div>
     <div class="chart-box"><canvas id="tempChart"></canvas></div>
   </div>
   <div class="chart-card">
     <div class="chart-hdr">
-      <p class="sec" style="margin:0">Ciclo estacional &mdash; Nino 3.4 vs climatologia 1991-2020</p>
+      <p class="sec" style="margin:0">Ciclo estacional &mdash; Niño 3.4 vs climatologia 1991-2020</p>
       <div class="legend-row" id="seasonal-legend"></div>
     </div>
     <p class="desc" style="margin-bottom:10px">Temperatura mensual de 2023-2026 comparada con el promedio historico 1991-2020. Permite ver si el ano actual sigue o se desvía del patron estacional tipico.</p>
@@ -164,8 +165,8 @@ footer a{color:#58a6ff;text-decoration:none}
 
 <!-- TAB PRONOSTICO -->
 <div class="tab-panel" id="tab-fcst">
-  <p class="sec">Pronostico mas reciente &mdash; Nino 3.4</p>
-  <p class="desc">Pronostico mensual de temperatura superficial del mar en la region Nino 3.4, emitido por NOAA/CPC usando regresion de ensamble. Los <b>leads</b> indican los meses de anticipacion desde la fecha de emision.</p>
+  <p class="sec">Pronostico mas reciente &mdash; Niño 3.4</p>
+  <p class="desc">Pronostico mensual de temperatura superficial del mar en la region Niño 3.4, emitido por NOAA/CPC usando regresion de ensamble. Los <b>leads</b> indican los meses de anticipacion desde la fecha de emision.</p>
   <div class="cards" id="fcst-cards"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
     <p class="sec" style="margin:0">Periodos a mostrar (NOAA/CPC)</p>
@@ -176,7 +177,7 @@ footer a{color:#58a6ff;text-decoration:none}
   </div>
   <div class="chart-card">
     <div class="chart-hdr">
-      <p class="sec" style="margin:0">Temperatura SST Nino 3.4 &mdash; NOAA/CPC</p>
+      <p class="sec" style="margin:0">Temperatura SST Niño 3.4 &mdash; NOAA/CPC</p>
       <div class="legend-row">
         <div class="leg-item"><div class="leg-line" style="background:#94a3b8"></div>Observado</div>
         <div class="leg-item"><div class="leg-line" style="background:#34d399"></div>Pronostico</div>
@@ -189,23 +190,23 @@ footer a{color:#58a6ff;text-decoration:none}
   </div>
   <div class="chart-card">
     <div class="chart-hdr">
-      <p class="sec" style="margin:0">Anomalia SST Nino 3.4 &mdash; NOAA/CPC</p>
+      <p class="sec" style="margin:0">Anomalia SST Niño 3.4 &mdash; NOAA/CPC</p>
       <div class="legend-row">
         <div class="leg-item"><div class="leg-line" style="background:#94a3b8"></div>Observado</div>
         <div class="leg-item"><div class="leg-line" style="background:#f472b6"></div>Pronostico</div>
         <div class="leg-item"><div style="width:22px;height:10px;background:rgba(244,114,182,.18);border-radius:2px"></div>P10-P90</div>
       </div>
     </div>
-    <p class="desc" style="margin-bottom:10px">Desviacion respecto al promedio 1991-2020. Superior a +0.5 C indica El Nino; inferior a -0.5 C senala La Nina. Las zonas coloreadas muestran los umbrales.</p>
+    <p class="desc" style="margin-bottom:10px">Desviacion respecto al promedio 1991-2020. Superior a +0.5 C indica El Niño; inferior a -0.5 C senala La Niña. Las zonas coloreadas muestran los umbrales.</p>
     <div class="chart-box" style="height:240px"><canvas id="fcstAnomChart"></canvas></div>
   </div>
   <div class="chart-card">
     <div class="chart-hdr">
       <p class="sec" style="margin:0">Probabilidades ENSO &mdash; NOAA/CPC</p>
       <div class="legend-row">
-        <div class="leg-item"><div class="leg-line" style="background:#6ab4ff"></div>La Nina</div>
+        <div class="leg-item"><div class="leg-line" style="background:#6ab4ff"></div>La Niña</div>
         <div class="leg-item"><div class="leg-line" style="background:#8b949e"></div>Neutral</div>
-        <div class="leg-item"><div class="leg-line" style="background:#ff8c5a"></div>El Nino</div>
+        <div class="leg-item"><div class="leg-line" style="background:#ff8c5a"></div>El Niño</div>
       </div>
     </div>
     <p class="desc" style="margin-bottom:10px">Probabilidades calculadas directamente desde el pronostico NOAA/CPC usando los umbrales de anomalia +/-0.5 C y la distribucion de incertidumbre del modelo.</p>
@@ -224,9 +225,9 @@ footer a{color:#58a6ff;text-decoration:none}
           <th style="background:var(--surface2);padding:9px 13px;font-size:.72rem;text-transform:uppercase;color:var(--muted);text-align:center">Clim (C)</th>
           <th style="background:var(--surface2);padding:9px 13px;font-size:.72rem;text-transform:uppercase;color:var(--muted);text-align:center">Anomalia</th>
           <th style="background:var(--surface2);padding:9px 13px;font-size:.72rem;text-transform:uppercase;color:var(--muted);text-align:center">P10-P90</th>
-          <th style="background:var(--surface2);padding:9px 13px;font-size:.72rem;text-transform:uppercase;color:var(--muted);text-align:center">P(La Nina)</th>
+          <th style="background:var(--surface2);padding:9px 13px;font-size:.72rem;text-transform:uppercase;color:var(--muted);text-align:center">P(La Niña)</th>
           <th style="background:var(--surface2);padding:9px 13px;font-size:.72rem;text-transform:uppercase;color:var(--muted);text-align:center">P(Neutral)</th>
-          <th style="background:var(--surface2);padding:9px 13px;font-size:.72rem;text-transform:uppercase;color:var(--muted);text-align:center">P(El Nino)</th>
+          <th style="background:var(--surface2);padding:9px 13px;font-size:.72rem;text-transform:uppercase;color:var(--muted);text-align:center">P(El Niño)</th>
           <th style="background:var(--surface2);padding:9px 13px;font-size:.72rem;text-transform:uppercase;color:var(--muted);text-align:center">Condicion</th>
         </tr></thead>
         <tbody id="fcst-table"></tbody>
@@ -235,7 +236,7 @@ footer a{color:#58a6ff;text-decoration:none}
   </details>
   <div class="chart-card">
     <div class="chart-hdr">
-      <p class="sec" style="margin:0">Plumas IRI/Columbia &mdash; anomalia Nino 3.4</p>
+      <p class="sec" style="margin:0">Plumas IRI/Columbia &mdash; anomalia Niño 3.4</p>
       <div class="legend-row">
         <div class="leg-item"><div class="leg-line" style="background:#94a3b8"></div>Observado</div>
         <div class="leg-item"><div class="leg-line" style="background:#60a5fa"></div>Avg Dyn</div>
@@ -251,9 +252,9 @@ footer a{color:#58a6ff;text-decoration:none}
     <div class="chart-hdr">
       <p class="sec" style="margin:0">Probabilidades ENSO &mdash; IRI/Columbia (<span id="iri-issue-label"></span>)</p>
       <div class="legend-row">
-        <div class="leg-item"><div class="leg-line" style="background:#6ab4ff"></div>La Nina</div>
+        <div class="leg-item"><div class="leg-line" style="background:#6ab4ff"></div>La Niña</div>
         <div class="leg-item"><div class="leg-line" style="background:#8b949e"></div>Neutral</div>
-        <div class="leg-item"><div class="leg-line" style="background:#ff8c5a"></div>El Nino</div>
+        <div class="leg-item"><div class="leg-line" style="background:#ff8c5a"></div>El Niño</div>
       </div>
     </div>
     <p class="desc" style="margin-bottom:10px">Pronostico del IRI/Columbia basado en el promedio de 20+ modelos dinamicos y estadisticos. Anomalias referidas a OISSTv2, que puede diferir hasta 0.5 C respecto a ERSSTv5.</p>
@@ -3043,12 +3044,12 @@ const RAW_FCST_CSV=`target_yr,target_mo,mes_label,issue_yr,issue_mo,lead,mean_ss
 
 const IRI_ISSUE='Marzo 2026';
 const IRI_SEASONS=['MAM','AMJ','MJJ','JJA','JAS','ASO','SON','OND','NDJ'];
-// Probabilidades IRI (%) [La Nina, Neutral, El Nino] — Marzo 2026
+// Probabilidades IRI (%) [La Niña, Neutral, El Niño] — Marzo 2026
 const IRI_PROBS={
   MAM:[0,91,9],AMJ:[0,53,47],MJJ:[0,28,72],JJA:[0,20,80],
   JAS:[1,23,76],ASO:[1,21,78],SON:[2,20,78],OND:[4,23,73],NDJ:[5,22,73]
 };
-// Modelos individuales — anomalia SST Nino 3.4 (deg C) — Marzo 2026
+// Modelos individuales — anomalia SST Niño 3.4 (deg C) — Marzo 2026
 const IRI_MODELS={
   dyn:{
     'AUS-ACCESS':  [0.80,1.30,1.77,2.20,null,null,null,null,null],
@@ -3134,7 +3135,7 @@ const SEASON_COLORS=['#60a5fa','#fbbf24','#f87171','#34d399','#c084fc','#fb923c'
 
 // HELPERS
 const cond=a=>a>=0.5?'nino':a<=-0.5?'nina':'neu';
-const CLBL={nino:'El Nino',nina:'La Nina',neu:'Neutral'};
+const CLBL={nino:'El Niño',nina:'La Niña',neu:'Neutral'};
 const CBDG={nino:'b-nino',nina:'b-nina',neu:'b-neu'};
 const CDOT={nino:'d-nino',nina:'d-nina',neu:'d-neu'};
 const fmt=v=>(v>=0?'+':'')+v.toFixed(2);
@@ -3161,11 +3162,11 @@ function buildCards(){
   const lo=ONI_DATA[ONI_DATA.length-1],lr=RONI_DATA[RONI_DATA.length-1];
   const co=cond(lo.anom),cr=cond(lr.anom);
   document.getElementById('estado-cards').innerHTML=
-    '<div class="card"><div class="card-lbl">Indice ONI</div><div class="card-idx">Oceanic Nino Index &middot; Nino 3.4</div>'+
+    '<div class="card"><div class="card-lbl">Indice ONI</div><div class="card-idx">Oceanic Niño Index &middot; Niño 3.4</div>'+
     '<div class="card-val" style="color:'+colV(lo.anom)+'">'+fmt(lo.anom)+' C</div>'+
     '<div class="card-seas">Temporada: <b>'+lo.seas+' '+lo.yr+'</b></div>'+
     '<span class="badge '+CBDG[co]+'"><span class="dot '+CDOT[co]+'"></span>'+CLBL[co]+'</span></div>'+
-    '<div class="card"><div class="card-lbl">Indice RONI</div><div class="card-idx">Relative ONI &middot; Nino 3.4 vs region</div>'+
+    '<div class="card"><div class="card-lbl">Indice RONI</div><div class="card-idx">Relative ONI &middot; Niño 3.4 vs region</div>'+
     '<div class="card-val" style="color:'+colV(lr.anom)+'">'+fmt(lr.anom)+' C</div>'+
     '<div class="card-seas">Temporada: <b>'+lr.seas+' '+lr.yr+'</b></div>'+
     '<span class="badge '+CBDG[cr]+'"><span class="dot '+CDOT[cr]+'"></span>'+CLBL[cr]+'</span></div>';
@@ -3227,11 +3228,11 @@ function setRangeIdx(n){
 function buildTempCards(){
   const lt=TEMP_DATA[TEMP_DATA.length-1],c=cond(lt.anom);
   document.getElementById('temp-cards').innerHTML=
-    '<div class="card"><div class="card-lbl">Temperatura Nino 3.4</div><div class="card-idx">ERSSTv5 &middot; Base 1991-2020</div>'+
+    '<div class="card"><div class="card-lbl">Temperatura Niño 3.4</div><div class="card-idx">ERSSTv5 &middot; Base 1991-2020</div>'+
     '<div class="card-val" style="color:var(--temp34)">'+lt.temp.toFixed(2)+' C</div>'+
     '<div class="card-seas">Mes: <b>'+MONTHS[lt.mon-1]+' '+lt.yr+'</b></div>'+
     '<span class="badge '+CBDG[c]+'"><span class="dot '+CDOT[c]+'"></span>'+CLBL[c]+'</span></div>'+
-    '<div class="card"><div class="card-lbl">Anomalia Nino 3.4</div><div class="card-idx">Desviacion respecto a climatologia</div>'+
+    '<div class="card"><div class="card-lbl">Anomalia Niño 3.4</div><div class="card-idx">Desviacion respecto a climatologia</div>'+
     '<div class="card-val" style="color:'+colV(lt.anom)+'">'+fmt(lt.anom)+' C</div>'+
     '<div class="card-seas">Mes: <b>'+MONTHS[lt.mon-1]+' '+lt.yr+'</b></div>'+
     '<span class="badge '+CBDG[c]+'"><span class="dot '+CDOT[c]+'"></span>'+CLBL[c]+'</span></div>';
@@ -3453,9 +3454,9 @@ function buildFcstTable(){
 function _probBar(ctx,labels,pN,pNeu,pE){
   return new Chart(ctx,{type:'bar',
     data:{labels,datasets:[
-      {label:'La Nina',data:pN,backgroundColor:'rgba(59,158,255,.75)',borderColor:'#3b9eff',borderWidth:1},
+      {label:'La Niña',data:pN,backgroundColor:'rgba(59,158,255,.75)',borderColor:'#3b9eff',borderWidth:1},
       {label:'Neutral',data:pNeu,backgroundColor:'rgba(139,148,158,.55)',borderColor:'#8b949e',borderWidth:1},
-      {label:'El Nino',data:pE,backgroundColor:'rgba(255,107,53,.75)',borderColor:'#ff6b35',borderWidth:1}
+      {label:'El Niño',data:pE,backgroundColor:'rgba(255,107,53,.75)',borderColor:'#ff6b35',borderWidth:1}
     ]},
     options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
       scales:{x:{stacked:true,ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'}},
