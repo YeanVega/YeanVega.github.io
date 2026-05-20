@@ -242,7 +242,7 @@ footer a{color:#58a6ff;text-decoration:none}
         <div class="leg-item"><div class="leg-line" style="background:#ff8c5a"></div>El Nino</div>
       </div>
     </div>
-    <p class="desc" style="margin-bottom:10px">Pronostico del IRI/Columbia basado en el promedio de 20+ modelos dinamicos y estadisticos. Anomalias referidas a OISSTv2, que puede diferir hasta 0.5 C respecto a ERSSTv5.</p>
+    <p class="desc" style="margin-bottom:10px">Pronostico del IRI/Columbia basado en el promedio de 20+ modelos dinamicos y estadisticos. Anomalias referidas a OISSTv2, que puede diferir hasta 0.5 C respecto a ERSSTv5. (Valores aproximados obtenidos por digitalización de imágen)</p>
     <div class="chart-box" style="height:240px"><canvas id="probIriChart"></canvas></div>
   </div>
   <div class="chart-card">
@@ -256,29 +256,18 @@ footer a{color:#58a6ff;text-decoration:none}
         <div class="leg-item"><div class="leg-line" style="background:#c084fc"></div>CS-IRI-MM</div>
       </div>
     </div>
-    <p class="desc" style="margin-bottom:10px">Anomalias pronosticadas por temporada estacional. Se muestran los promedios del conjunto dinamico, estadistico y total, mas el modelo CS-IRI-MM. Las observaciones reales anclan el grafico en los 3 meses previos.</p>
+    <p class="desc" style="margin-bottom:10px">Anomalias pronosticadas por temporada estacional. Se muestran los promedios del conjunto dinamico, estadistico y total, mas el modelo CS-IRI-MM. Las observaciones reales anclan el grafico en los 3 meses previos. (Valores aproximados obtenidos por digitalización de imágen)</p>
     <div class="chart-box" style="height:260px"><canvas id="iriPlumeChart"></canvas></div>
   </div>
-  <details class="chart-card" style="margin-bottom:24px">
-    <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">
-      <span class="arr">&#9658;</span>Tabla modelos IRI/Columbia &mdash; anomalias por temporada (C)
-    </summary>
-    <div id="iri-table-wrap" style="overflow-x:auto;margin-top:14px"></div>
-    <p style="font-size:.72rem;color:var(--muted);margin-top:10px">Fuente:
-      <a href="https://iri.columbia.edu/our-expertise/climate/forecasts/enso/current/?enso_tab=enso-sst_table" target="_blank" style="color:#58a6ff">IRI/Columbia University — Marzo 2026</a>
-      &middot; Anomalias referidas a OISSTv2 (puede diferir 0.5 C de ERSSTv5)
-    </p>
-  </details>
 </div>
 
 <footer>
   Fuente: NOAA Climate Prediction Center &mdash;
-  <a href="https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt" target="_blank">ONI</a> &middot;
-  <a href="https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt" target="_blank">RONI</a> &middot;
-  <a href="https://www.cpc.ncep.noaa.gov/data/indices/ersst5.nino.mth.91-20.ascii" target="_blank">ERSSTv5</a> &middot;
-  <a href="https://ftp.cpc.ncep.noaa.gov/wd53du/sstnino34.operational.txt" target="_blank">Pronostico NOAA</a> &middot;
+  <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php" target="_blank">ONI</a> &middot;
+  <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/" target="_blank">RONI</a> &middot;
+  <a href="https://www.cpc.ncep.noaa.gov/data/indices/ersst5.nino.mth.91-20.ascii" target="_blank">Temperatura/Anomalía</a> &middot;
   <a href="https://iri.columbia.edu/our-expertise/climate/forecasts/enso/current/" target="_blank">IRI/Columbia</a><br>
-  &copy; 2026 Yeferson Andres Velazco &middot; Estadistico &middot; Universidad Nacional de Colombia
+  &copy; 2026 Yeferson Andres Velazco &middot; Estadístico &middot; Universidad Nacional de Colombia
 </footer>
 </div>
 <script>
@@ -1196,7 +1185,8 @@ const RAW_ONI=`SEAS  YR   TOTAL   ANOM
   OND 2025  26.05  -0.55
   NDJ 2025  25.97  -0.54
   DJF 2026  26.13  -0.37
-  JFM 2026  26.57  -0.16`;
+  JFM 2026  26.58  -0.15
+  FMA 2026  27.28   0.11`;
 const RAW_RONI=`SEAS   YR  ANOM
 DJF  1950 -1.47
 JFM  1950 -1.27
@@ -2111,7 +2101,8 @@ SON  2025 -0.87
 OND  2025 -0.93
 NDJ  2025 -0.97
 DJF  2026 -0.88
-JFM  2026 -0.72`;
+JFM  2026 -0.71
+FMA  2026 -0.48`;
 const RAW_TEMP=`YR   MON  NINO1+2  ANOM   NINO3    ANOM   NINO4    ANOM   NINO3.4  ANOM
 1950   1   23.01   -1.55   23.56   -2.10   26.94   -1.38   24.55   -1.99
 1950   2   24.32   -1.78   24.89   -1.52   26.67   -1.53   25.06   -1.69
@@ -3026,31 +3017,33 @@ const RAW_TEMP=`YR   MON  NINO1+2  ANOM   NINO3    ANOM   NINO4    ANOM   NINO3.
 2025  11   21.19   -0.46   24.47   -0.63   28.17   -0.52   26.01   -0.70
 2025  12   22.19   -0.62   24.43   -0.80   28.21   -0.33   25.93   -0.67
 2026   1   24.28   -0.29   25.02   -0.64   28.24   -0.08   25.96   -0.58
-2026   2   26.82    0.72   26.31   -0.10   28.40    0.20   26.48   -0.27
-2026   3   27.31    0.82   27.41    0.20   28.67    0.35   27.23   -0.06`;
+2026   2   26.82    0.71   26.31   -0.09   28.40    0.20   26.48   -0.27
+2026   3   27.38    0.89   27.41    0.21   28.75    0.43   27.27   -0.01
+2026   4   26.80    1.27   27.95    0.37   29.40    0.77   28.05    0.23`;
 const RAW_FCST_CSV=`target_yr,target_mo,mes_label,issue_yr,issue_mo,lead,mean_sst,clim_sst,mean_anom,p10_sst,p90_sst,p10_anom,p90_anom,p_nina,p_neutral,p_nino,condition
-2026,5,May 2026,2026,4,0,28.33,27.93,0.4,28.79,27.85,0.86,-0.08,0.027,0.207,0.766,Neutral
-2026,6,Jun 2026,2026,4,1,28.35,27.73,0.62,28.84,27.79,1.11,0.06,0.026,0.108,0.866,El Niño
-2026,7,Jul 2026,2026,4,2,28.05,27.29,0.76,28.71,27.33,1.42,0.04,0.039,0.143,0.818,El Niño
-2026,8,Ago 2026,2026,4,3,27.76,26.86,0.91,28.62,26.84,1.77,-0.02,0.06,0.183,0.757,El Niño
-2026,9,Sep 2026,2026,4,4,27.67,26.72,0.95,28.73,26.55,2.01,-0.17,0.071,0.195,0.734,El Niño
-2026,10,Oct 2026,2026,4,5,27.78,26.72,1.06,29.03,26.48,2.31,-0.24,0.068,0.194,0.738,El Niño
-2026,11,Nov 2026,2026,4,6,27.82,26.7,1.12,29.17,26.46,2.47,-0.24,0.062,0.203,0.735,El Niño
-2026,12,Dic 2026,2026,4,7,27.32,26.6,0.72,28.6,26.03,2.0,-0.57,0.111,0.297,0.592,El Niño
-2027,1,Ene 2027,2026,4,8,27.29,26.54,0.75,28.46,26.1,1.92,-0.44,0.114,0.307,0.579,El Niño
-2027,2,Feb 2027,2026,4,9,27.46,26.75,0.71,28.47,26.44,1.72,-0.31,0.104,0.292,0.604,El Niño
-2027,3,Mar 2027,2026,4,10,27.66,27.28,0.38,28.6,26.69,1.32,-0.59,0.177,0.29,0.533,Neutral
-2027,4,Abr 2027,2026,4,11,27.94,27.82,0.12,28.66,27.2,0.84,-0.62,0.187,0.306,0.507,Neutral
-2027,5,May 2027,2026,4,12,28.01,27.93,0.08,28.62,27.4,0.69,-0.53,0.199,0.33,0.471,Neutral
-2027,6,Jun 2027,2026,4,13,27.75,27.73,0.02,28.37,27.13,0.64,-0.6,0.25,0.355,0.395,Neutral
+2026,5,May 2026,2026,5,-1,28.14,27.93,0.21,28.49,27.83,0.56,-0.1,0.016,0.369,0.615,Neutral
+2026,6,Jun 2026,2026,5,0,28.48,27.73,0.75,28.96,27.98,1.23,0.25,0.01,0.055,0.935,El Niño
+2026,7,Jul 2026,2026,5,1,28.3,27.29,1.01,28.86,27.69,1.57,0.4,0.01,0.056,0.934,El Niño
+2026,8,Ago 2026,2026,5,2,28.07,26.86,1.21,28.81,27.26,1.95,0.41,0.016,0.09,0.894,El Niño
+2026,9,Sep 2026,2026,5,3,28.02,26.72,1.3,28.97,26.96,2.25,0.24,0.027,0.113,0.86,El Niño
+2026,10,Oct 2026,2026,5,4,28.17,26.72,1.45,29.29,26.93,2.57,0.21,0.028,0.115,0.857,El Niño
+2026,11,Nov 2026,2026,5,5,28.29,26.7,1.59,29.52,26.97,2.82,0.27,0.024,0.11,0.866,El Niño
+2026,12,Dic 2026,2026,5,6,28.25,26.6,1.65,29.49,26.91,2.89,0.31,0.024,0.109,0.867,El Niño
+2027,1,Ene 2027,2026,5,7,27.83,26.54,1.29,29.01,26.6,2.47,0.06,0.05,0.168,0.782,El Niño
+2027,2,Feb 2027,2026,5,8,27.91,26.75,1.16,28.95,26.82,2.2,0.07,0.052,0.16,0.788,El Niño
+2027,3,Mar 2027,2026,5,9,28.15,27.28,0.87,28.99,27.28,1.71,-0.0,0.048,0.155,0.797,El Niño
+2027,4,Abr 2027,2026,5,10,28.09,27.82,0.27,28.81,27.33,0.99,-0.49,0.131,0.249,0.62,Neutral
+2027,5,May 2027,2026,5,11,28.09,27.93,0.16,28.7,27.47,0.77,-0.46,0.162,0.304,0.534,Neutral
+2027,6,Jun 2027,2026,5,12,27.8,27.73,0.07,28.43,27.18,0.7,-0.55,0.22,0.344,0.436,Neutral
+2027,7,Jul 2027,2026,5,13,27.4,27.29,0.11,28.16,26.64,0.87,-0.65,0.259,0.347,0.394,Neutral
 `;
 
-const IRI_ISSUE='Marzo 2026';
-const IRI_SEASONS=['MAM','AMJ','MJJ','JJA','JAS','ASO','SON','OND','NDJ'];
+const IRI_ISSUE='Mayo 2026';
+const IRI_SEASONS=['MJJ','JJA','JAS','ASO','SON','OND','NDJ','DJF','JFM'];
 // Probabilidades IRI (%) [La Nina, Neutral, El Nino] — Marzo 2026
 const IRI_PROBS={
-  MAM:[0,91,9],AMJ:[0,53,47],MJJ:[0,28,72],JJA:[0,20,80],
-  JAS:[1,23,76],ASO:[1,21,78],SON:[2,20,78],OND:[4,23,73],NDJ:[5,22,73]
+  MJJ:[0,2,98],JJA:[0,2,98],JAS:[0,2,98],ASO:[0,2,98],
+  SON:[0,2,98],OND:[0,3,97],NDJ:[0,3,97],DJF:[0,4,96],JFM:[0,3,97]
 };
 // Modelos individuales — anomalia SST Nino 3.4 (deg C) — Marzo 2026
 const IRI_MODELS={
@@ -3060,7 +3053,7 @@ const IRI_MODELS={
     'BCC DIAP':    [0.12,0.46,0.75,0.98,1.20,1.34,1.48,1.59,1.74],
     'CMC CANSIP':  [0.47,0.82,1.09,1.25,1.30,1.33,1.39,1.47,1.51],
     'COLA CCSM4':  [0.40,0.73,1.07,1.45,1.79,2.03,2.17,2.22,2.21],
-    'CS-IRI-MM':   [0.28,0.53,0.76,1.05,1.31,1.62,null,null,null],
+    'CS-IRI-MM':   [1.00,1.23,1.50,1.86,2.20,2.45,null,null,null],
     'IOCAS ICM':   [-0.15,-0.03,0.17,0.31,0.41,0.48,0.50,0.51,0.52],
     'JMA':         [0.21,0.43,0.70,1.01,1.33,null,null,null,null],
     'KMA':         [0.65,1.01,1.38,1.73,null,null,null,null,null],
@@ -3084,13 +3077,13 @@ const IRI_MODELS={
     'XRO':         [-0.06,0.08,0.26,0.45,0.61,0.79,1.00,1.22,1.39]
   }
 };
-const IRI_AVG_DYN= [0.322,0.650,0.965,1.234,1.236,1.405,1.528,1.401,1.453];
-const IRI_AVG_STAT=[0.035,0.217,0.385,0.527,0.612,0.701,0.761,0.829,0.864];
-const IRI_AVG_ALL= [0.207,0.477,0.733,0.951,0.939,1.035,1.102,1.044,1.085];
+const IRI_AVG_DYN= [1.22,1.55,1.82,2.05,2.15,2.20,2.18,1.95,1.75];
+const IRI_AVG_STAT=[0.86,1.10,1.32,1.52,1.70,1.80,1.84,1.76,1.60];
+const IRI_AVG_ALL= [1.04,1.33,1.57,1.79,1.93,2.00,2.01,1.86,1.68];
 const OBS_RECENT=[
-  {label:'Ene 2026',sst:25.96,anom:-0.58},
   {label:'Feb 2026',sst:26.48,anom:-0.27},
-  {label:'Mar 2026',sst:27.23,anom:-0.06}
+  {label:'Mar 2026',sst:27.27,anom:-0.01},
+  {label:'Abr 2026',sst:28.05,anom:0.23}
 ];
 
 // PARSERS
