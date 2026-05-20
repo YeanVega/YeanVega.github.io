@@ -3325,7 +3325,7 @@ function buildSeasonChart(){
 function toggleYear(yr){if(activeYears.has(yr))activeYears.delete(yr);else activeYears.add(yr);buildSeasonChart();}
 
 // TAB PRONOSTICO
-function condFcst(a){return a>=0.5?'niño':a<=-0.5?'nina':'neu';}
+function condFcst(a){return a>=0.5?'nino':a<=-0.5?'nina':'neu';}
 function fmtF(v){return(v>=0?'+':'')+( +v).toFixed(2);}
 function fcstSlice(){return fcstRange===0?FCST_DATA:FCST_DATA.slice(0,fcstRange);}
 
