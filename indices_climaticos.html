@@ -165,7 +165,7 @@ footer a{color:#58a6ff;text-decoration:none}
 <!-- TAB PRONOSTICO -->
 <div class="tab-panel active" id="tab-fcst">
   <p class="sec">Pronóstico más reciente &mdash; Niño 3.4</p>
-  <p class="desc">Pronóstico mensual de temperatura superficial del mar en la región Niño 3.4, emitido por NOAA/CPC usando regresión de ensamble. Los <b>leads</b> indican los meses de anticipación desde la fecha de emisión.</p>
+  <p class="desc">Pronóstico mensual de temperatura superficial del mar en la región Niño 3.4, emitido por NOAA/CPC usando regresión de ensamble. Los <b>leads</b> (pasos) indican los meses de anticipación desde la fecha de emisión.</p>
   <div class="cards" id="fcst-cards"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
     <p class="sec" style="margin:0">Periodos a mostrar (NOAA/CPC)</p>
@@ -3361,9 +3361,9 @@ function buildFcstCards(){
       '<span class="badge '+CBDG[c2]+'"><span class="dot '+CDOT[c2]+'"></span>'+CLBL[c2]+'</span></div>';
   }
   document.getElementById('fcst-cards').innerHTML=
-    card('Proximo periodo (lead '+d.lead+')',iss,d,c)+
-    card('Lead 6 meses',iss,d6,c6)+
-    card('Ultimo periodo (lead '+last.lead+')',iss,last,cl)+
+    card('Mes Actual ',iss,d,c)+
+    card('+7 meses',iss,d6,c6)+
+    card('Último periodo (lead '+last.lead+')',iss,last,cl)+
     '<div class="card"><div class="card-lbl">Alcance del pronostico</div><div class="card-idx">NOAA/CPC &middot; ERSSTv5</div>'+
     '<div class="card-val" style="color:var(--muted);font-size:1.6rem">'+FCST_DATA.length+'</div>'+
     '<div class="card-seas">Leads '+d.lead+'&ndash;'+last.lead+'</div>'+
