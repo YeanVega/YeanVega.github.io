@@ -73,7 +73,7 @@ footer a{color:#58a6ff;text-decoration:none}
 <div class="container">
 <header>
   <h1>🌊 Monitor ENSO — ONI · RONI · Temperatura</h1>
-  <p>Indices del Niño Oscilacion Sur &middot; NOAA/CPC</p>
+  <p>Índices del Niño Oscilación Sur &middot; NOAA/CPC</p>
 </header>
 <div id="info-bar"><span id="info-txt">Cargando...</span><span id="info-date"></span></div>
 <div class="tab-bar">
@@ -85,33 +85,33 @@ footer a{color:#58a6ff;text-decoration:none}
 <!-- TAB INDICES -->
 <div class="tab-panel active" id="tab-indices">
   <p class="sec">Estado actual</p>
-  <p class="desc">El <b>ONI</b> (Oceanic Niño Index) mide la anomalía de temperatura del mar en la region Niño 3.4 como promedio de 3 meses consecutivos. El <b>RONI</b> (Relative ONI) compara esa anomalía respecto al resto del tropico, corrigiendo el calentamiento de fondo. Ambos calculados por NOAA/CPC con base climatologica 1991-2020.</p>
+  <p class="desc">El <b>ONI</b> (Oceanic Niño Index) mide la anomalía de temperatura del mar en la región Niño 3.4 como promedio de 3 meses consecutivos. El <b>RONI</b> (Relative ONI) compara esa anomalía respecto al resto del trópico, corrigiendo el calentamiento de fondo. Ambos calculados por NOAA/CPC con base climatológica 1991-2020.</p>
   <div class="cards" id="estado-cards"></div>
-  <p class="sec">Ultimos 6 periodos estacionales</p>
+  <p class="sec">Últimos 6 periodos estacionales</p>
   <div class="tbl-wrap"><table>
     <thead><tr><th>Temporada</th><th>ONI (anomalía C)</th><th>RONI (anomalía C)</th><th>Condicion</th></tr></thead>
     <tbody id="table-body"></tbody>
   </table></div>
   <div class="chart-card">
     <div class="chart-hdr">
-      <p class="sec" style="margin:0">Evolucion historica &mdash; ONI &amp; RONI</p>
+      <p class="sec" style="margin:0">Evolución histórica &mdash; ONI &amp; RONI</p>
       <div class="legend-row">
         <div class="leg-item"><div class="leg-line" style="background:var(--oni)"></div>ONI</div>
         <div class="leg-item"><div class="leg-line" style="background:var(--roni)"></div>RONI</div>
       </div>
     </div>
-    <p class="desc" style="margin-bottom:10px">Serie historica completa de ambos indices. Los colores de fondo indican periodos El Niño (rojo) y La Niña (azul) segun el umbral de 0.5 C.</p>
+    <p class="desc" style="margin-bottom:10px">Serie histórica completa de ambos índices. Los colores de fondo indican periodos El Niño (rojo) y La Niña (azul) según el umbral de 0.5 C.</p>
     <div class="range-row" id="range-idx">
       <button class="rbtn activate" onclick="setRangeIdx(6)">6 Meses</button>
-      <button class="rbtn" onclick="setRangeIdx(12)">1 ano</button>
-      <button class="rbtn" onclick="setRangeIdx(24)">2 anos</button>
-      <button class="rbtn" onclick="setRangeIdx(60)">5 anos</button>
-      <button class="rbtn" onclick="setRangeIdx(120)">10 anos</button>
+      <button class="rbtn" onclick="setRangeIdx(12)">1 año</button>
+      <button class="rbtn" onclick="setRangeIdx(24)">2 años</button>
+      <button class="rbtn" onclick="setRangeIdx(60)">5 años</button>
+      <button class="rbtn" onclick="setRangeIdx(120)">10 años</button>
       <button class="rbtn" onclick="setRangeIdx(0)">Todo</button>
     </div>
     <div class="chart-box"><canvas id="idxChart"></canvas></div>
   </div>
-  <p class="sec">Umbrales de clasificacion</p>
+  <p class="sec">Umbrales de clasificación</p>
   <div class="ref-grid">
     <div class="ref-card"><div class="rt" style="color:#ff8c5a">El Niño</div><div class="rr">ONI &ge; +0.5 C<br>por 5+ periodos consecutivos</div></div>
     <div class="ref-card"><div class="rt" style="color:#8b949e">Neutral</div><div class="rr">-0.5 C &lt; anomalía &lt; +0.5 C</div></div>
@@ -122,11 +122,11 @@ footer a{color:#58a6ff;text-decoration:none}
 <!-- TAB TEMPERATURA -->
 <div class="tab-panel" id="tab-temp">
   <p class="sec">Estado actual &mdash; Niño 3.4</p>
-  <p class="desc">Temperatura superficial del mar (SST) mensual en la region Niño 3.4 (5N-5S, 120-170W) del conjunto <b>ERSSTv5</b> de NOAA. La anomalía resulta de restar la climatologia mensual 1991-2020.</p>
+  <p class="desc">Temperatura superficial del mar (SST) mensual en la región Niño 3.4 (5N-5S, 120-170W) del conjunto <b>ERSSTv5</b> de NOAA. La anomalía resulta de restar la climatologia mensual 1991-2020.</p>
   <div class="cards" id="temp-cards"></div>
-  <p class="sec">Ultimos 12 meses &mdash; Temperatura &amp; anomalía Niño 3.4</p>
+  <p class="sec">Últimos 12 meses &mdash; Temperatura &amp; anomalía Niño 3.4</p>
   <div class="tbl-wrap"><table>
-    <thead><tr><th>Ano</th><th>Mes</th><th>Temp (C)</th><th>anomalía (C)</th><th>Condicion</th></tr></thead>
+    <thead><tr><th>Año</th><th>Mes</th><th>Temp (C)</th><th>anomalía (C)</th><th>Condición</th></tr></thead>
     <tbody id="temp-table"></tbody>
   </table></div>
   <div class="chart-card">
@@ -137,16 +137,16 @@ footer a{color:#58a6ff;text-decoration:none}
         <div class="leg-item"><div class="leg-dash" style="border-color:var(--anom34)"></div>anomalía</div>
       </div>
     </div>
-    <p class="desc" style="margin-bottom:10px">Serie historica de temperatura absoluta (eje izquierdo, verde) y anomalía (eje derecho, rosa). Activa o desactiva cada serie con los botones.</p>
+    <p class="desc" style="margin-bottom:10px">Serie histórica de temperatura absoluta (eje izquierdo, verde) y anomalía (eje derecho, rosa). Activa o desactiva cada serie con los botones.</p>
     <div class="toggle-row">
       <button class="tog-btn active" id="tog-temp" onclick="toggleSeries('temp')"><span class="tog-dot" style="background:var(--temp34)"></span>Temperatura</button>
       <button class="tog-btn active" id="tog-anom" onclick="toggleSeries('anom')"><span class="tog-dot" style="background:var(--anom34)"></span>anomalía</button>
     </div>
     <div class="range-row" id="range-temp">
-      <button class="rbtn" onclick="setRangeTemp(12)">1 ano</button>
-      <button class="rbtn active" onclick="setRangeTemp(24)">2 anos</button>
-      <button class="rbtn" onclick="setRangeTemp(60)">5 anos</button>
-      <button class="rbtn" onclick="setRangeTemp(120)">10 anos</button>
+      <button class="rbtn" onclick="setRangeTemp(12)">1 año</button>
+      <button class="rbtn active" onclick="setRangeTemp(24)">2 años</button>
+      <button class="rbtn" onclick="setRangeTemp(60)">5 años</button>
+      <button class="rbtn" onclick="setRangeTemp(120)">10 años</button>
       <button class="rbtn" onclick="setRangeTemp(0)">Todo</button>
     </div>
     <div class="chart-box"><canvas id="tempChart"></canvas></div>
@@ -156,7 +156,7 @@ footer a{color:#58a6ff;text-decoration:none}
       <p class="sec" style="margin:0">Ciclo estacional &mdash; Niño 3.4 vs climatologia 1991-2020</p>
       <div class="legend-row" id="seasonal-legend"></div>
     </div>
-    <p class="desc" style="margin-bottom:10px">Temperatura mensual de 2023-2026 comparada con el promedio historico 1991-2020. Permite ver si el ano actual sigue o se desvía del patron estacional tipico.</p>
+    <p class="desc" style="margin-bottom:10px">Temperatura mensual de 2023-2026 comparada con el promedio histórico 1991-2020. Permite ver si el año actual sigue o se desvía del patrón estacional típico.</p>
     <div class="toggle-row" id="seasonal-years"></div>
     <div class="chart-box" style="height:240px"><canvas id="seasonChart"></canvas></div>
   </div>
@@ -164,8 +164,8 @@ footer a{color:#58a6ff;text-decoration:none}
 
 <!-- TAB PRONOSTICO -->
 <div class="tab-panel" id="tab-fcst">
-  <p class="sec">Pronostico mas reciente &mdash; Niño 3.4</p>
-  <p class="desc">Pronostico mensual de temperatura superficial del mar en la region Niño 3.4, emitido por NOAA/CPC usando regresion de ensamble. Los <b>leads</b> indican los meses de anticipacion desde la fecha de emision.</p>
+  <p class="sec">Pronóstico más reciente &mdash; Niño 3.4</p>
+  <p class="desc">Pronóstico mensual de temperatura superficial del mar en la región Niño 3.4, emitido por NOAA/CPC usando regresión de ensamble. Los <b>leads</b> indican los meses de anticipación desde la fecha de emisión.</p>
   <div class="cards" id="fcst-cards"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
     <p class="sec" style="margin:0">Periodos a mostrar (NOAA/CPC)</p>
@@ -179,8 +179,8 @@ footer a{color:#58a6ff;text-decoration:none}
       <p class="sec" style="margin:0">Temperatura SST Niño 3.4 &mdash; NOAA/CPC</p>
       <div class="legend-row">
         <div class="leg-item"><div class="leg-line" style="background:#94a3b8"></div>Observado</div>
-        <div class="leg-item"><div class="leg-line" style="background:#34d399"></div>Pronostico</div>
-        <div class="leg-item"><div class="leg-dash" style="border-color:rgba(139,148,158,.6)"></div>Climatologia</div>
+        <div class="leg-item"><div class="leg-line" style="background:#34d399"></div>Pronóstico</div>
+        <div class="leg-item"><div class="leg-dash" style="border-color:rgba(139,148,158,.6)"></div>Climatología</div>
         <div class="leg-item"><div style="width:22px;height:10px;background:rgba(52,211,153,.2);border-radius:2px"></div>P10-P90</div>
       </div>
     </div>
