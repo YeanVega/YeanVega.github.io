@@ -77,13 +77,13 @@ footer a{color:#58a6ff;text-decoration:none}
 </header>
 <div id="info-bar"><span id="info-txt">Cargando...</span><span id="info-date"></span></div>
 <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('indices',this)">📊 Índices ONI &amp; RONI</button>
+    <button class="tab-btn" onclick="switchTab('indices',this)">📊 Índices ONI &amp; RONI</button>
     <button class="tab-btn" onclick="switchTab('temp',this)">🌡️ Temperatura Niño 3.4</button>
-    <button class="tab-btn" onclick="switchTab('fcst',this)">🔮 Pronóstico</button>
+    <button class="tab-btn active" onclick="switchTab('fcst',this)">🔮 Pronóstico</button>
 </div>
 
 <!-- TAB INDICES -->
-<div class="tab-panel active" id="tab-indices">
+<div class="tab-panel" id="tab-indices">
   <p class="sec">Estado actual</p>
   <p class="desc">El <b>ONI</b> (Oceanic Nino Index) mide la anomalia de temperatura del mar en la region Nino 3.4 como promedio de 3 meses consecutivos. El <b>RONI</b> (Relative ONI) compara esa anomalia respecto al resto del tropico, corrigiendo el calentamiento de fondo. Ambos calculados por NOAA/CPC con base climatologica 1991-2020.</p>
   <div class="cards" id="estado-cards"></div>
@@ -163,7 +163,7 @@ footer a{color:#58a6ff;text-decoration:none}
 </div>
 
 <!-- TAB PRONOSTICO -->
-<div class="tab-panel" id="tab-fcst">
+<div class="tab-panel active" id="tab-fcst">
   <p class="sec">Pronostico mas reciente &mdash; Nino 3.4</p>
   <p class="desc">Pronostico mensual de temperatura superficial del mar en la region Nino 3.4, emitido por NOAA/CPC usando regresion de ensamble. Los <b>leads</b> indican los meses de anticipacion desde la fecha de emision.</p>
   <div class="cards" id="fcst-cards"></div>
